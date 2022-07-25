@@ -13,7 +13,15 @@
     discord
     pavucontrol
     flameshot
+
+    # Development tools
     vscode
+    jetbrains.idea-ultimate
+    jetbrains.rider
+    jetbrains.datagrip
+
+    gradle
+    maven
 
     # Gnome software
     gnome.nautilus
