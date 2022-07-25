@@ -1,0 +1,5 @@
+configuration {
+  terminal: "alacritty";
+  modi: "window,run,ssh,drun";
+  font: "JetBrains Mono 12";
+}

@@ -247,16 +247,17 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "h",      spawn_proc("alacritty -e htop"),         {description = "open htop",        group = "launcher"}),
     awful.key({ modkey, "Shift"   }, "d",      spawn_proc("discord"),                   {description = "open discord",     group = "launcher"}),
 
+    awful.key({ modkey            }, "p",      spawn_proc("rofi -show drun"),           {description = "show the app launcher",     group = "launcher"}),
+    awful.key({ modkey            }, "o",      spawn_proc("rofi -show run"),            {description = "show the program launcher", group = "launcher"}),
+    awful.key({ modkey            }, "e",      spawn_proc("rofimoji -a copy"),          {description = "show the emoji picker",     group = "launcher"}),
+
     -- Master/stack sizing manipulation
     awful.key({ modkey,           }, "l", function () awful.tag.incmwfact( 0.05)          end, {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h", function () awful.tag.incmwfact(-0.05)          end, {description = "decrease master width factor", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "h", function () awful.tag.incnmaster( 1, nil, true) end, {description = "increase the number of master clients", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "l", function () awful.tag.incnmaster(-1, nil, true) end, {description = "decrease the number of master clients", group = "layout"}),
     awful.key({ modkey, "Control" }, "h", function () awful.tag.incncol( 1, nil, true)    end, {description = "increase the number of columns", group = "layout"}),
-    awful.key({ modkey, "Control" }, "l", function () awful.tag.incncol(-1, nil, true)    end, {description = "decrease the number of columns", group = "layout"}),
-
-    -- Launchers
-    awful.key({ modkey            }, "p", function() menubar.show() end, {description = "show the menubar", group = "launcher"})
+    awful.key({ modkey, "Control" }, "l", function () awful.tag.incncol(-1, nil, true)    end, {description = "decrease the number of columns", group = "layout"})
 )
 
 clientkeys = gears.table.join(
