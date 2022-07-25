@@ -15,9 +15,10 @@
     flameshot
     vscode
 
-    # Gnome applications
+    # Gnome software
     gnome.nautilus
-    gnome.adwaita-icon-theme
+    gnome.gnome-disk-utility
+    baobab
 
     # Launchers
     rofi
@@ -79,6 +80,34 @@
   xdg.configFile.rofi = {
     source = ./config/rofi;
     recursive = true;
+  };
+
+  # Themes
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = pkgs.gnome.adwaita-icon-theme;
+      name = "Adwaita";
+    };
+    theme = {
+      package = pkgs.gnome.gnome-themes-extra;
+      name = "Adwaita-dark";
+    };
+
+    gtk3 = {
+      extraConfig = {
+        gtk-application-prefer-dark-theme = true;
+      };
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = {
+      package = pkgs.adwaita-qt;
+      name = "Adwaita-dark";
+    };
   };
 
   # This value determines the Home Manager release that your
