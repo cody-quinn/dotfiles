@@ -97,6 +97,14 @@
     '';
   };
 
+  # Programs and configurating them
+  cody.java.additionalPackages = { inherit (pkgs) jdk17 jdk11 jdk8; };
+  programs.java = {
+    enable = true;
+    package = pkgs.jdk17;
+  };
+
+  programs.zsh.enable = true;
   programs.dconf.enable = true;
 
   # This value determines the NixOS release from which the default
