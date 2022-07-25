@@ -245,6 +245,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "e",      spawn_proc(browser),                     {description = "open the browser", group = "launcher"}),
     awful.key({ modkey, "Shift"   }, "s",      spawn_proc("flameshot gui --clipboard"), {description = "take screenshot",  group = "launcher"}),
     awful.key({ modkey, "Shift"   }, "h",      spawn_proc("alacritty -e htop"),         {description = "open htop",        group = "launcher"}),
+    awful.key({ modkey, "Shift"   }, "d",      spawn_proc("discord"),                   {description = "open discord",     group = "launcher"}),
 
     -- Master/stack sizing manipulation
     awful.key({ modkey,           }, "l", function () awful.tag.incmwfact( 0.05)          end, {description = "increase master width factor", group = "layout"}),
