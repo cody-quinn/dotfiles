@@ -1,0 +1,12 @@
+font:
+  normal:
+    family: JetBrains Mono
+  size: 7 
+
+colors:
+  primary:
+    background: '#000000'
+    foreground: '#c5c8c6'
+
+shell:
+  program: zsh
