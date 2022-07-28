@@ -14,6 +14,7 @@
     pavucontrol
     flameshot
     krita
+    bitwarden
 
     # Development tools
     vscode
