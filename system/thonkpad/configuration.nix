@@ -7,7 +7,6 @@
 {
   imports =
     [ 
-      # "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/lenovo/thinkpad/p50"
       ./hardware-configuration.nix
     ];
 
@@ -69,7 +68,7 @@
   users.users.cody = {
     isNormalUser = true;
     description = "Cody";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
     packages = with pkgs; [];
     shell = pkgs.zsh;
   };
@@ -107,6 +106,8 @@
 
   programs.zsh.enable = true;
   programs.dconf.enable = true;
+  programs.slock.enable = true;
+  programs.adb.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

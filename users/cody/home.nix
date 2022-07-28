@@ -20,6 +20,7 @@
     jetbrains.idea-ultimate
     jetbrains.rider
     jetbrains.datagrip
+    android-studio
 
     gradle
     maven
