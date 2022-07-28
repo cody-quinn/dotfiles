@@ -13,6 +13,7 @@
     discord
     pavucontrol
     flameshot
+    krita
 
     # Development tools
     vscode
