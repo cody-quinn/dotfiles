@@ -6,11 +6,11 @@
 
   home.packages = with pkgs; [
     # Desktop software
+    (discord.override { nss = nss_latest; })
     qutebrowser
     firefox
     thunderbird
     alacritty
-    discord
     pavucontrol
     flameshot
     krita
