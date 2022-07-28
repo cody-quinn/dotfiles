@@ -152,13 +152,16 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioMute",            spawn_proc("pamixer -t")),
     awful.key({ }, "XF86AudioRaiseVolume",     spawn_proc("pamixer -i 5")),
     awful.key({ }, "XF86AudioLowerVolume",     spawn_proc("pamixer -d 5")),
+    awful.key({ }, "XF86AudioMicMute",         spawn_proc("pamixer --default-source -t")),
 
     awful.key({ }, "XF86MonBrightnessUp",      spawn_proc("brightnessctl set +5%")),
     awful.key({ }, "XF86MonBrightnessDown",    spawn_proc("brightnessctl set 5%-")),
 
+    awful.key({ modkey,           }, "Left",   spawn_proc("playerctl previous")),
+    awful.key({ modkey,           }, "Right",  spawn_proc("playerctl next")),
+    awful.key({ modkey,           }, "Down",   spawn_proc("playerctl play-pause")),
+
     -- Focused window changing
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext),
     awful.key({ modkey,           }, "j",      function () awful.client.focus.byidx( 1) end),
     awful.key({ modkey,           }, "k",      function () awful.client.focus.byidx(-1) end),
 

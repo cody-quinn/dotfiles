@@ -38,6 +38,7 @@
     # CLI tools
     pamixer
     brightnessctl
+    playerctl
     exa
   ];
 
