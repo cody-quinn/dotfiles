@@ -43,27 +43,11 @@ browser = "qutebrowser"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = { awful.layout.suit.tile }
 -- }}}
-
--- {{{ Menu
--- Create a launcher widget and a main menu
-mylauncher = awful.widget.launcher({ 
-    image = beautiful.awesome_icon, 
-    menu = awful.menu({ items = {
-        { "manual", terminal .. " -e man awesome" },
-        { "restart", awesome.restart },
-        { "quit", function() awesome.quit() end },
-    }}) 
-})
 
 -- {{{ Wibar
 -- Create a wibox for each screen and add it
@@ -140,7 +124,6 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
             s.mytaglist,
             s.mypromptbox,
         },
