@@ -82,6 +82,11 @@
     recursive = true;
   };
 
+  xdg.configFile.flameshot = {
+    source = ./config/flameshot;
+    recursive = true;
+  };
+
   xdg.configFile.qutebrowser = {
     source = ./config/qutebrowser;
     recursive = true;
