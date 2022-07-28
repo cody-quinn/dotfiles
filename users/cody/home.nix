@@ -36,6 +36,8 @@
     rofimoji
 
     # CLI tools
+    pamixer
+    brightnessctl
     exa
   ];
 

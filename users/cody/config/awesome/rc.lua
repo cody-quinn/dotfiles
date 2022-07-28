@@ -148,18 +148,26 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Control", "Shift" }, "r", awesome.restart),
     awful.key({ modkey, "Control", "Shift" }, "q", awesome.quit),
 
+    -- Media controls
+    awful.key({ }, "XF86AudioMute",            spawn_proc("pamixer -t")),
+    awful.key({ }, "XF86AudioRaiseVolume",     spawn_proc("pamixer -i 5")),
+    awful.key({ }, "XF86AudioLowerVolume",     spawn_proc("pamixer -d 5")),
+
+    awful.key({ }, "XF86MonBrightnessUp",      spawn_proc("brightnessctl set +5%")),
+    awful.key({ }, "XF86MonBrightnessDown",    spawn_proc("brightnessctl set 5%-")),
+
     -- Focused window changing
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext),
-    awful.key({ modkey,           }, "j", function () awful.client.focus.byidx( 1) end),
-    awful.key({ modkey,           }, "k", function () awful.client.focus.byidx(-1) end),
+    awful.key({ modkey,           }, "j",      function () awful.client.focus.byidx( 1) end),
+    awful.key({ modkey,           }, "k",      function () awful.client.focus.byidx(-1) end),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1) end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1) end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
+    awful.key({ modkey, "Shift"   }, "j",      function () awful.client.swap.byidx(  1) end),
+    awful.key({ modkey, "Shift"   }, "k",      function () awful.client.swap.byidx( -1) end),
+    awful.key({ modkey, "Control" }, "j",      function () awful.screen.focus_relative( 1) end),
+    awful.key({ modkey, "Control" }, "k",      function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey,           }, "u",      awful.client.urgent.jumpto),
 
     -- Standard programs
     awful.key({ modkey, "Shift"   }, "Return", spawn_proc(terminal)),
@@ -168,18 +176,19 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "e",      spawn_proc(browser)),
     awful.key({ modkey, "Shift"   }, "s",      spawn_proc("flameshot gui")),
     awful.key({ modkey, "Shift"   }, "d",      spawn_proc("discord")),
+    awful.key({ modkey, "Shift"   }, "l",      spawn_proc("slock")),
 
     awful.key({ modkey            }, "p",      spawn_proc("rofi -show drun")),
     awful.key({ modkey            }, "o",      spawn_proc("rofi -show run")),
     awful.key({ modkey            }, "e",      spawn_proc("rofimoji -a copy")),
 
     -- Master/stack sizing manipulation
-    awful.key({ modkey,           }, "l", function () awful.tag.incmwfact( 0.05) end),
-    awful.key({ modkey,           }, "h", function () awful.tag.incmwfact(-0.05) end),
-    awful.key({ modkey, "Shift"   }, "h", function () awful.tag.incnmaster( 1, nil, true) end),
-    awful.key({ modkey, "Shift"   }, "l", function () awful.tag.incnmaster(-1, nil, true) end),
-    awful.key({ modkey, "Control" }, "h", function () awful.tag.incncol( 1, nil, true) end),
-    awful.key({ modkey, "Control" }, "l", function () awful.tag.incncol(-1, nil, true) end)
+    awful.key({ modkey,           }, "l",      function () awful.tag.incmwfact( 0.05) end),
+    awful.key({ modkey,           }, "h",      function () awful.tag.incmwfact(-0.05) end),
+    awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1, nil, true) end),
+    awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1, nil, true) end),
+    awful.key({ modkey, "Control" }, "h",      function () awful.tag.incncol( 1, nil, true) end),
+    awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1, nil, true) end)
 )
 
 clientkeys = gears.table.join(
@@ -275,17 +284,7 @@ awful.rules.rules = {
         } 
     },
     { 
-        rule_any = {
-            class = {
-            "Gpick",
-            "Kruler",
-            "Sxiv",
-            "Wpa_gui",
-            "veromix",
-            "xtightvncviewer",
-            },
-            role = { "pop-up" } 
-        },
+        rule_any = { role = { "pop-up" } },
         properties = { floating = true }
     },
 }
