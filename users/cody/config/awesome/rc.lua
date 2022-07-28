@@ -163,9 +163,10 @@ globalkeys = gears.table.join(
 
     -- Standard programs
     awful.key({ modkey, "Shift"   }, "Return", spawn_proc(terminal)),
+    awful.key({ modkey, "Shift"   }, "h",      spawn_proc(terminal.." -e htop")),
+    awful.key({ modkey, "Shift"   }, "p",      spawn_proc(terminal.." -e python")),
     awful.key({ modkey, "Shift"   }, "e",      spawn_proc(browser)),
     awful.key({ modkey, "Shift"   }, "s",      spawn_proc("flameshot gui --clipboard")),
-    awful.key({ modkey, "Shift"   }, "h",      spawn_proc("alacritty -e htop")),
     awful.key({ modkey, "Shift"   }, "d",      spawn_proc("discord")),
 
     awful.key({ modkey            }, "p",      spawn_proc("rofi -show drun")),

@@ -83,6 +83,7 @@
     htop
     gzip
     feh
+    python310
   ];
 
   fonts.fonts = with pkgs; [
