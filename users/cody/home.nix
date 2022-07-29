@@ -17,6 +17,7 @@
     bitwarden
 
     # Development tools
+    neovide
     vscode
     jetbrains.idea-ultimate
     jetbrains.rider
@@ -53,6 +54,7 @@
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     shellAliases = {
+      vim = "nvim";
       l = "exa";
       ls = "exa -l --icons --group-directories-first";
       la = "exa -la --icons --group-directories-first";
@@ -88,6 +90,11 @@
 
   xdg.configFile.flameshot = {
     source = ./config/flameshot;
+    recursive = true;
+  };
+
+  xdg.configFile.nvim = {
+    source = ./config/nvim;
     recursive = true;
   };
 

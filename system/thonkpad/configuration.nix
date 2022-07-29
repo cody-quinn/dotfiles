@@ -76,7 +76,7 @@
   # Packages relegated to the entire system
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    vim
+    neovim
     wget
     git
     htop
