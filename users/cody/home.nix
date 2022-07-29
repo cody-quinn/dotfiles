@@ -63,7 +63,6 @@
       ga = "git add .";
       gc = "git commit -S";
       gp = "git push";
-      gacp = "ga && gc && gp";
     };
     history = {
       size = 1000;
