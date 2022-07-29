@@ -59,6 +59,11 @@
       ls = "exa -l --icons --group-directories-first";
       la = "exa -la --icons --group-directories-first";
       lt = "exa -T -I \"node_modules|venv|Build\"";
+      gs = "git status";
+      ga = "git add .";
+      gc = "git commit -S";
+      gp = "git push";
+      gacp = "ga && gc && gp";
     };
     history = {
       size = 1000;
