@@ -83,6 +83,7 @@
     gzip
     feh
     python310
+    xclip
   ];
 
   fonts.fonts = with pkgs; [
