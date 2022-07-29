@@ -16,6 +16,9 @@
     krita
     bitwarden
 
+    # Gamer time
+    polymc
+
     # Development tools
     neovide
     vscode
