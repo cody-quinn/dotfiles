@@ -68,7 +68,7 @@
   users.users.cody = {
     isNormalUser = true;
     description = "Cody";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
     packages = with pkgs; [];
     shell = pkgs.zsh;
   };
@@ -110,6 +110,9 @@
   programs.slock.enable = true;
   programs.adb.enable = true;
   programs.steam.enable = true;
+
+  # Setting up docker
+  virtualisation.docker.enable = true;
 
   # Setting default applications
   xdg.mime.defaultApplications = {
