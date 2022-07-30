@@ -109,6 +109,7 @@
   programs.dconf.enable = true;
   programs.slock.enable = true;
   programs.adb.enable = true;
+  programs.steam.enable = true;
 
   # Setting default applications
   xdg.mime.defaultApplications = {
