@@ -180,6 +180,9 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "s",      spawn_proc("flameshot gui")),
     awful.key({ modkey, "Shift"   }, "d",      spawn_proc("discord")),
     awful.key({ modkey, "Shift"   }, "l",      spawn_proc("slock")),
+    awful.key({ modkey, "Shift"   }, "m",      spawn_proc("polymc")),
+    awful.key({ modkey, "Shift"   }, "f",      spawn_proc("nautilus")),
+    awful.key({ modkey, "Shift"   }, "n",      spawn_proc("neovide")),
 
     awful.key({ modkey            }, "p",      spawn_proc("rofi -show drun")),
     awful.key({ modkey            }, "o",      spawn_proc("rofi -show run")),
@@ -195,7 +198,7 @@ globalkeys = gears.table.join(
 )
 
 clientkeys = gears.table.join(
-    awful.key({ modkey, "Shift"   }, "f",
+    awful.key({ modkey, "Control" }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
             c:raise()
