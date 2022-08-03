@@ -148,15 +148,21 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Control", "Shift" }, "r", awesome.restart),
     awful.key({ modkey, "Control", "Shift" }, "q", awesome.quit),
 
-    -- Media controls
+    -- Brightness & media controls
+    awful.key({ }, "XF86MonBrightnessUp",      spawn_proc("brightnessctl set +5%")),
+    awful.key({ }, "XF86MonBrightnessDown",    spawn_proc("brightnessctl set 5%-")),
+
     awful.key({ }, "XF86AudioMute",            spawn_proc("pamixer -t")),
     awful.key({ }, "XF86AudioRaiseVolume",     spawn_proc("pamixer -i 5")),
     awful.key({ }, "XF86AudioLowerVolume",     spawn_proc("pamixer -d 5")),
     awful.key({ }, "XF86AudioMicMute",         spawn_proc("pamixer --default-source -t")),
 
-    awful.key({ }, "XF86MonBrightnessUp",      spawn_proc("brightnessctl set +5%")),
-    awful.key({ }, "XF86MonBrightnessDown",    spawn_proc("brightnessctl set 5%-")),
+    awful.key({ }, "XF86AudioPrev",            spawn_proc("playerctl previous")),
+    awful.key({ }, "XF86AudioNext",            spawn_proc("playerctl next")),
+    awful.key({ }, "XF86AudioPlay",            spawn_proc("playerctl play-pause")),
+    awful.key({ }, "XF86AudioPause",           spawn_proc("playerctl play-pause")),
 
+    -- Media controls for keyboards without dedicated keys
     awful.key({ modkey,           }, "Left",   spawn_proc("playerctl previous")),
     awful.key({ modkey,           }, "Right",  spawn_proc("playerctl next")),
     awful.key({ modkey,           }, "Down",   spawn_proc("playerctl play-pause")),
