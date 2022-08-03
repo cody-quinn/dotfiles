@@ -116,6 +116,8 @@
   };
 
   # Themes
+  home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
+
   gtk = {
     enable = true;
     iconTheme = {
