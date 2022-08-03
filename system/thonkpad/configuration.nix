@@ -84,6 +84,7 @@
     feh
     python310
     xclip
+    unityhub
   ];
 
   fonts.fonts = with pkgs; [
