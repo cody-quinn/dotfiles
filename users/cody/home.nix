@@ -115,6 +115,13 @@
     recursive = true;
   };
 
+  # Additional files that dont fit the "xdg" format, such
+  # as greasemonkey scripts for qutebrowser.
+  home.file.".config/qutebrowser/greasemonkey/return-youtube-dislike.user.js".source = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/4e0f633a1478191cb9e7fcce085ff7ffda19405e/Extensions/UserScript/Return%20Youtube%20Dislike.user.js";
+    hash = "sha256-RTlB1BRZG2Lvr31LprLVKm6OAJlP2ZKSqiT/Fj2ItZw=";
+  };
+
   # Themes
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
 
