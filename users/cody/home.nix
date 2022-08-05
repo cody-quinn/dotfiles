@@ -43,6 +43,8 @@
     pamixer
     brightnessctl
     playerctl
+    youtube-dl
+    mpv
     exa
   ];
 
