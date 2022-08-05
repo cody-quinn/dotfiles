@@ -15,6 +15,7 @@
     flameshot
     krita
     bitwarden
+    obs-studio
 
     # Gamer time
     polymc
