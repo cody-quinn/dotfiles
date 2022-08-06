@@ -16,6 +16,7 @@
     krita
     bitwarden
     obs-studio
+    notion-app-enhanced
 
     # Gamer time
     polymc
