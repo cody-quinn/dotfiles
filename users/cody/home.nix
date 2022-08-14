@@ -48,6 +48,8 @@
     youtube-dl
     mpv
     exa
+    unzip
+    zip
   ];
 
   programs.git = {
