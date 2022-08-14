@@ -18,6 +18,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  # Adding extra modprobe config options, first one making
+  # the function keys on apple layout keywords actually act as
+  # function keys and not special ones.
+  boot.extraModprobeConfig = ''
+    options hid_apple fnmode=2
+  '';
+
   # Networking
   networking.hostName = "thonkpad"; # Define your hostname.
   networking.networkmanager.enable = true;
