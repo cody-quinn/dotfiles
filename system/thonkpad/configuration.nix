@@ -120,9 +120,9 @@
   };
 
   # Programs and configurating them
-  cody.java.additionalPackages = { inherit (pkgs) jdk17 jdk11 jdk8; };
   programs.java = {
     enable = true;
+    additionalRuntimes = { inherit (pkgs) jdk17 jdk11 jdk8; };
     package = pkgs.jdk17;
   };
 

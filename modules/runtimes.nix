@@ -3,7 +3,7 @@
 { config, pkgs, lib, ... }:
 with lib;
 let
-  javaCfg = config.cody.java;
+  javaCfg = config.programs.java;
   defaultEnvVariables = {
     XDG_DATA_HOME = mkDefault "$HOME/.local/share";
     XDG_CACHE_HOME = mkDefault "$HOME/.cache";
@@ -12,11 +12,11 @@ let
 in
 {
   options = {
-    cody.java.additionalPackages = mkOption {
+    programs.java.additionalRuntimes = mkOption {
       description = ''
         Java packages to install. Typical values are pkgs.jdk or pkgs.jre. Example:
         ```
-          cody.java.additionalPackages = {
+          programs.java.additionalRuntimes = {
             inherit (pkgs) jdk11 jdk14 jdk15;
           };
         ```
@@ -33,7 +33,7 @@ in
     let
       escapeDashes = it: replaceStrings [ "-" ] [ "_" ] it;
 
-      javaPkgs = javaCfg.additionalPackages;
+      javaPkgs = javaCfg.additionalRuntimes;
       javaAliases = mapAttrs' (name: value: nameValuePair "java-${name}" "${value.home}/bin/java") javaPkgs;
       javaTmpfiles = mapAttrsFlatten (name: value: "L+ /nix/java${name} - - - - ${value.home}") javaPkgs;
       javaEnvVariables = mapAttrs' (name: value: nameValuePair "JAVA_HOME_${toUpper (escapeDashes name)}" "${value.home}") javaPkgs;
