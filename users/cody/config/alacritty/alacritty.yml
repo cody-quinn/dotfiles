@@ -1,12 +1,15 @@
+env:
+  WINIT_X11_SCALE_FACTOR: "1.5"
+
 font:
   normal:
     family: JetBrains Mono
-  size: 7 
+  size: 7
 
 colors:
   primary:
-    background: '#000000'
-    foreground: '#c5c8c6'
+    background: "#000000"
+    foreground: "#c5c8c6"
 
 shell:
   program: zsh
