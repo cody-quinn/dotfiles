@@ -124,7 +124,14 @@
   };
 
   # Themes
-  home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
+  home.pointerCursor = {
+    x11.enable = true;
+    gtk.enable = true;
+    
+    package = pkgs.vanilla-dmz;
+    name = "Vanilla-DMZ";
+    size = 24;
+  };
 
   gtk = {
     enable = true;
