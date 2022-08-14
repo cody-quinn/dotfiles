@@ -10,6 +10,9 @@
       ./hardware-configuration.nix
     ];
 
+  # Allow the installation of non-FOSS packages
+  nixpkgs.config.allowUnfree = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -24,12 +27,23 @@
   services.blueman.enable = true;
 
   # Timezone and internationalisation
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.utf8";
 
-  # Configure keymap in X11
+  # Configuring my display drivers & options
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl.enable = true;
+
+  hardware.nvidia = {
+    prime.offload.enable = false;
+    prime.sync.enable = true;
+
+    modesetting.enable = false;
+  };
+  
   services.xserver = {
     enable = true;
+    dpi = 96;
 
     displayManager = {
       sddm.enable = true;
@@ -44,7 +58,6 @@
     };
 
     libinput.touchpad.tapping = false;
-
     layout = "us";
     xkbVariant = "";
   };
@@ -74,7 +87,6 @@
   };
 
   # Packages relegated to the entire system
-  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     neovim
     wget
@@ -85,6 +97,7 @@
     python310
     xclip
     unityhub
+    tmux
   ];
 
   fonts.fonts = with pkgs; [
