@@ -72,6 +72,9 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enabling mullvad VPN
+  services.mullvad-vpn.enable = true;
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -105,6 +108,7 @@
     xclip
     unityhub
     tmux
+    mullvad
   ];
 
   fonts.fonts = with pkgs; [
