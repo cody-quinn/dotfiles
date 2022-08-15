@@ -45,6 +45,7 @@
     pamixer
     brightnessctl
     playerctl
+    zathura
     youtube-dl
     mpv
     exa
