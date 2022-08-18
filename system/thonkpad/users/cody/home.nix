@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ../../modules/home/base
-    ../../modules/home/desktop
-    ../../modules/home/develop
+    ../../../../modules/home/base
+    ../../../../modules/home/desktop
+    ../../../../modules/home/develop
   ];
 
   home.username = "cody";
@@ -95,7 +95,6 @@
   };
 
   programs.gpg.enable = true;
-
   services.gpg-agent = {
     enable = true;
     pinentryFlavor = "gnome3";
