@@ -1,6 +1,6 @@
 # Forked from https://github.com/gytis-ivaskevicius/nixfiles/blob/master/config/dev.nix (MIT)
-
 { config, pkgs, lib, ... }:
+
 with lib;
 let
   javaCfg = config.programs.java;

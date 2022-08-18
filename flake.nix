@@ -33,7 +33,6 @@
 
           modules = [ 
             nixos-hardware.nixosModules.lenovo-thinkpad-p50
-            ./modules/runtimes.nix
             ./system/thonkpad/configuration.nix
           ];
         };

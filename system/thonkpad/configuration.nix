@@ -7,6 +7,8 @@
 {
   imports =
     [ 
+      ../../modules/system/virtualisation
+      ../../modules/system/runtimes
       ./hardware-configuration.nix
     ];
 
@@ -91,7 +93,7 @@
   users.users.cody = {
     isNormalUser = true;
     description = "Cody";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" "libvirtd" ];
     packages = with pkgs; [];
     shell = pkgs.zsh;
   };
@@ -137,7 +139,8 @@
   programs.steam.enable = true;
 
   # Setting up docker
-  virtualisation.docker.enable = true;
+  sys.virtualisation.kvm.enable = true;
+  sys.virtualisation.docker.enable = true;
 
   # Setting default applications
   xdg.mime.defaultApplications = {
