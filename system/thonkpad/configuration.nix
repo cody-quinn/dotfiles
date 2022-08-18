@@ -3,8 +3,9 @@
 {
   imports = [ 
     ../../modules/system/base
-    ../../modules/system/virtualisation
+    ../../modules/system/desktop
     ../../modules/system/runtimes
+    ../../modules/system/virtualisation
     ./hardware-configuration.nix
   ];
 
@@ -20,13 +21,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
-  # Adding extra modprobe config options, first one making
-  # the function keys on apple layout keywords actually act as
-  # function keys and not special ones.
-  boot.extraModprobeConfig = ''
-    options hid_apple fnmode=2
-  '';
 
   # Networking
   networking.hostName = "thonkpad"; # Define your hostname.
@@ -47,30 +41,11 @@
   hardware.nvidia = {
     prime.offload.enable = false;
     prime.sync.enable = true;
-
     modesetting.enable = false;
   };
-  
-  services.xserver = {
-    enable = true;
-    dpi = 96;
 
-    displayManager = {
-      sddm.enable = true;
-      defaultSession = "none+awesome";
-    };
-
-    windowManager.awesome = {
-      enable = true;
-      luaModules = with pkgs.luaPackages; [
-        luarocks
-      ];
-    };
-
-    libinput.touchpad.tapping = false;
-    layout = "us";
-    xkbVariant = "";
-  };
+  # Enabling AwesomeWM
+  sys.desktop.awesome.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

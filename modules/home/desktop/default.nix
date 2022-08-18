@@ -2,6 +2,8 @@
 
 {
   imports = [
+    ./configs.nix
+    ./software.nix
     ./theme.nix
   ];
 }

@@ -2,8 +2,6 @@
 
 {
   imports = [
-    ./configs.nix
-    ./git.nix
-    ./shell.nix
+    ./software.nix
   ];
 }
