@@ -7,6 +7,7 @@
 {
   imports =
     [ 
+      ../../modules/system/nixos
       ../../modules/system/virtualisation
       ../../modules/system/runtimes
       ./hardware-configuration.nix
@@ -117,13 +118,6 @@
     jetbrains-mono
     twemoji-color-font
   ];
-
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
 
   # Programs and configurating them
   programs.java = {
