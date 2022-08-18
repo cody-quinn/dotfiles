@@ -18,21 +18,13 @@
       };
     in
     {
-      homeConfigurations = {
-        cody = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-
-          modules = [
-            ./users/cody/home.nix
-          ];
-        };
-      };
       nixosConfigurations = {
         thonkpad = nixpkgs.lib.nixosSystem {
           inherit system;
 
-          modules = [ 
+          modules = [
             nixos-hardware.nixosModules.lenovo-thinkpad-p50
+            home-manager.nixosModules.home-manager
             ./system/thonkpad/configuration.nix
           ];
         };

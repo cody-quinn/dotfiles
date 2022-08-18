@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ../../modules/home/base
+    ../../modules/home/desktop
+  ];
+
   home.username = "cody";
   home.homeDirectory = "/home/cody";
 
@@ -49,39 +54,17 @@
     zathura
     youtube-dl
     mpv
-    exa
-    unzip
-    zip
+    feh
+    xclip
+
+    # Calculator
+    python310
   ];
 
   programs.git = {
     enable = true;
     userName  = "Cody";
     userEmail = "cody@codyq.dev";
-  };
-
-  programs.zsh = {
-    enable = true;
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
-    shellAliases = {
-      vim = "nvim";
-      l = "exa";
-      ls = "exa -l --icons --group-directories-first";
-      la = "exa -la --icons --group-directories-first";
-      lt = "exa -T -I \"node_modules|venv|Build\"";
-      gs = "git status";
-      ga = "git add .";
-      gc = "git commit -S";
-      gp = "git push";
-    };
-    history = {
-      size = 1000;
-      path = "${config.xdg.dataHome}/zsh/history";
-    };
-    localVariables = {
-      PROMPT = " ▲ %c ";
-    };
   };
 
   programs.autorandr = {
@@ -171,43 +154,6 @@
   home.file."./.config/qutebrowser/greasemonkey/return-youtube-dislike.user.js".source = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/4e0f633a1478191cb9e7fcce085ff7ffda19405e/Extensions/UserScript/Return%20Youtube%20Dislike.user.js";
     hash = "sha256-RTlB1BRZG2Lvr31LprLVKm6OAJlP2ZKSqiT/Fj2ItZw=";
-  };
-
-  # Themes
-  home.pointerCursor = {
-    x11.enable = true;
-    gtk.enable = true;
-    
-    package = pkgs.vanilla-dmz;
-    name = "Vanilla-DMZ";
-    size = 24;
-  };
-
-  gtk = {
-    enable = true;
-    iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
-      name = "Adwaita";
-    };
-    theme = {
-      package = pkgs.gnome.gnome-themes-extra;
-      name = "Adwaita-dark";
-    };
-
-    gtk3 = {
-      extraConfig = {
-        gtk-application-prefer-dark-theme = true;
-      };
-    };
-  };
-
-  qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style = {
-      package = pkgs.adwaita-qt;
-      name = "Adwaita-dark";
-    };
   };
 
   # This value determines the Home Manager release that your

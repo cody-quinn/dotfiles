@@ -1,17 +1,17 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
+{ config, pkgs, home-manager, ... }:
 
 {
-  imports =
-    [ 
-      ../../modules/system/nixos
-      ../../modules/system/virtualisation
-      ../../modules/system/runtimes
-      ./hardware-configuration.nix
-    ];
+  imports = [ 
+    ../../modules/system/base
+    ../../modules/system/virtualisation
+    ../../modules/system/runtimes
+    ./hardware-configuration.nix
+  ];
+
+  # Manage the user accounts using home manager
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.cody = import ../../users/cody/home.nix;
 
   # Allow the installation of non-FOSS packages
   nixpkgs.config.allowUnfree = true;
@@ -101,16 +101,7 @@
 
   # Packages relegated to the entire system
   environment.systemPackages = with pkgs; [
-    neovim
-    wget
-    git
-    htop
-    gzip
-    feh
-    python310
-    xclip
     unityhub
-    tmux
     mullvad
   ];
 
