@@ -9,13 +9,13 @@
     ./hardware-configuration.nix
   ];
 
+  # Allow the installation of non-FOSS packages
+  nixpkgs.config.allowUnfree = true;
+
   # Manage the user accounts using home manager
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.cody = import ./users/cody/home.nix;
-
-  # Allow the installation of non-FOSS packages
-  nixpkgs.config.allowUnfree = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

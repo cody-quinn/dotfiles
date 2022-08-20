@@ -30,6 +30,8 @@
 
     gradle
     maven
+    minikube
+    kubectl
 
     # Gnome software
     baobab
