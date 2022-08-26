@@ -30,6 +30,7 @@ in
     jnoortheen.nix-ide
     bungcip.better-toml
     matklad.rust-analyzer
+    ms-python.python
   ];
 
   programs.vscode.userSettings = {
@@ -64,6 +65,7 @@ in
     "[kotlin]" = { "editor.tabSize" = 4; };
     "[java]"   = { "editor.tabSize" = 4; };
 
+    "[python]" = { "editor.defaultFormatter" = "ms-python.python"; };
     "[nix]"    = { "editor.defaultFormatter" = "jnoortheen.nix-ide"; };
 
     "[rust]" = { 
