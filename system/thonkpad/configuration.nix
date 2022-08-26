@@ -1,7 +1,7 @@
-{ config, pkgs, home-manager, ... }:
+{ config, pkgs, lib, home-manager, ... }:
 
 {
-  imports = [ 
+  imports = [
     ../../modules/system/base
     ../../modules/system/desktop
     ../../modules/system/runtimes
@@ -70,7 +70,7 @@
     isNormalUser = true;
     description = "Cody";
     extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" "libvirtd" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };
 

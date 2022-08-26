@@ -61,16 +61,18 @@ in
     "nix.enableLanguageServer" = true;
 
     # Language specific
-    "[python]" = { "editor.tabSize" = 4; };
+    "[nix]" = { "editor.defaultFormatter" = "jnoortheen.nix-ide"; };
     "[kotlin]" = { "editor.tabSize" = 4; };
-    "[java]"   = { "editor.tabSize" = 4; };
+    "[java]" = { "editor.tabSize" = 4; };
 
-    "[python]" = { "editor.defaultFormatter" = "ms-python.python"; };
-    "[nix]"    = { "editor.defaultFormatter" = "jnoortheen.nix-ide"; };
+    "[python]" = {
+      "editor.defaultFormatter" = "ms-python.python";
+      "editor.tabSize" = 4;
+    };
 
-    "[rust]" = { 
-      "editor.tabSize" = 4; 
+    "[rust]" = {
       "editor.defaultFormatter" = "rust-lang.rust-analyzer";
+      "editor.tabSize" = 4;
     };
   };
 }
