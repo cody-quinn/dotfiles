@@ -2,13 +2,14 @@
   description = "Cody's System Flakes";
 
   inputs = {
+    flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware }: 
-    let 
+  outputs = { self, flake-utils, nixpkgs, home-manager, nixos-hardware }:
+    let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
@@ -17,6 +18,7 @@
         };
       };
     in
+    rec
     {
       nixosConfigurations = {
         thonkpad = nixpkgs.lib.nixosSystem {
@@ -28,6 +30,11 @@
             ./system/thonkpad/configuration.nix
           ];
         };
+      };
+      devShell.x86_64-linux = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          rnix-lsp
+        ];
       };
     };
 }

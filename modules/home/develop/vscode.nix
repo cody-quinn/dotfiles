@@ -57,11 +57,14 @@ in
     # Nix environment
     "nixEnvSelector.suggestion" = false;
     "nixEnvSelector.nixFile" = "$\{workspaceRoot\}/shell.nix";
+    "nix.enableLanguageServer" = true;
 
     # Language specific
     "[python]" = { "editor.tabSize" = 4; };
     "[kotlin]" = { "editor.tabSize" = 4; };
     "[java]"   = { "editor.tabSize" = 4; };
+
+    "[nix]"    = { "editor.defaultFormatter" = "jnoortheen.nix-ide"; };
 
     "[rust]" = { 
       "editor.tabSize" = 4; 
