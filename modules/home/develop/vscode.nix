@@ -45,12 +45,16 @@ in
     "editor.defaultFormatter" = "esbenp.prettier-vscode";
     "editor.tabSize" = 2;
 
+    # Integrated terminal
+    "terminal.integrated.defaultProfile.linux" = "zsh";
+
     # Rust analyzer
     "rust-analyzer.inlayHints.chainingHints.enable" = false;
     "rust-analyzer.inlayHints.parameterHints.enable" = false;
 
-    # Integrated terminal
-    "terminal.integrated.defaultProfile.linux" = "zsh";
+    # Nix environment
+    "nixEnvSelector.suggestion" = false;
+    "nixEnvSelector.nixFile" = "$\{workspaceRoot\}/shell.nix";
 
     # Language specific
     "[python]" = { "editor.tabSize" = 4; };
