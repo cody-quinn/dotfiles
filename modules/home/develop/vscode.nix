@@ -53,7 +53,13 @@ in
     "terminal.integrated.defaultProfile.linux" = "zsh";
 
     # Language specific
-    "[rust]"   = { "editor.tabSize" = 4; };
     "[python]" = { "editor.tabSize" = 4; };
+    "[kotlin]" = { "editor.tabSize" = 4; };
+    "[java]"   = { "editor.tabSize" = 4; };
+
+    "[rust]" = { 
+      "editor.tabSize" = 4; 
+      "editor.defaultFormatter" = "rust-lang.rust-analyzer";
+    };
   };
 }
