@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  hyper-term-theme = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+  vscode-hyper-term-theme = pkgs.vscode-utils.extensionFromVscodeMarketplace {
     name = "hyper-term-theme";
     publisher = "hsnazar";
     version = "0.3.0";
@@ -16,8 +16,10 @@ let
 in
 {
   programs.vscode.enable = true;
+
+  programs.vscode.mutableExtensionsDir = false;
   programs.vscode.extensions = with pkgs.vscode-extensions; [
-    hyper-term-theme
+    vscode-hyper-term-theme
     vscode-todo-highlight
 
     esbenp.prettier-vscode
