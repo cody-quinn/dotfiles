@@ -11,6 +11,10 @@ local wibox = require("wibox") -- Widget and layout library
 local beautiful = require("beautiful") -- Theme handling library
 local naughty = require("naughty") -- Notification library
 
+-- Widgets I plan on using
+local textbat = require("textbat")
+local textclock = wibox.widget.textclock
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -130,7 +134,8 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.textclock("%a %b %d, %I:%M %p"),
+            textbat("BAT0", "%d%%  "),
+            textclock(" %a %b %d, %I:%M:%S %p ", 1),
         },
     }
 end)
