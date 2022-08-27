@@ -15,6 +15,7 @@
       ga = "git add .";
       gc = "git commit -S";
       gp = "git push";
+      bat = "cat /sys/class/power_supply/BAT*/energy_now";
     };
     history = {
       size = 1000;
