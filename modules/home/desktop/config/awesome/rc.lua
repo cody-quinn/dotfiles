@@ -12,7 +12,7 @@ local beautiful = require("beautiful") -- Theme handling library
 local naughty = require("naughty") -- Notification library
 
 -- Widgets I plan on using
-local textbat = require("libs.textbat")
+local textbat = require("textbat")
 local textclock = wibox.widget.textclock
 
 -- {{{ Error handling

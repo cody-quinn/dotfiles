@@ -1,3 +1,0 @@
-[submodule "modules/home/desktop/config/awesome/libs/textbat"]
-	path = modules/home/desktop/config/awesome/libs/textbat
-	url = git@github.com:CatDevz/textbat.git
