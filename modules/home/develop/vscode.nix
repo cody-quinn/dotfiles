@@ -49,6 +49,7 @@ in
     "editor.tabSize" = 2;
 
     # Integrated terminal
+    "terminal.integrated.shellIntegration.enabled" = false;
     "terminal.integrated.defaultProfile.linux" = "zsh";
 
     # Rust analyzer
