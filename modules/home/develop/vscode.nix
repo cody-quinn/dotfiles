@@ -40,7 +40,7 @@ in
     "workbench.colorTheme" = "Hyper Term Black";
     "workbench.iconTheme" = "material-icon-theme";
     "editor.fontLigatures" = true;
-    "editor.fontFamily" = "'JetBrains Mono', 'monospace', monospace";
+    "editor.fontFamily" = "'JetBrains Mono', 'Font Awesome 6 Free', 'monospace', monospace";
     "editor.fontSize" = 13.5;
 
     # Formatting

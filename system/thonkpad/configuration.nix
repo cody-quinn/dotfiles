@@ -83,6 +83,7 @@
   fonts.fonts = with pkgs; [
     jetbrains-mono
     twemoji-color-font
+    font-awesome
   ];
 
   # Programs and configurating them
