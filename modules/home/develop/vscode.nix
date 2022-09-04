@@ -56,6 +56,7 @@ in
     # Rust analyzer
     "rust-analyzer.inlayHints.chainingHints.enable" = false;
     "rust-analyzer.inlayHints.parameterHints.enable" = false;
+    "rust-analyzer.checkOnSave.command" = "clippy";
 
     # Nix environment
     "nixEnvSelector.suggestion" = false;
