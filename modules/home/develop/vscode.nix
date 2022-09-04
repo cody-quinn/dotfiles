@@ -24,6 +24,7 @@ in
 
     esbenp.prettier-vscode
     ms-vscode-remote.remote-ssh
+    ms-vsliveshare.vsliveshare
     eamodio.gitlens
     pkief.material-icon-theme
     arrterian.nix-env-selector
@@ -76,4 +77,11 @@ in
       "editor.tabSize" = 4;
     };
   };
+
+  programs.vscode.keybindings = [
+    {
+      "key" = "ctrl+shift+s";
+      "command" = "workbench.view.extension.liveshare";
+    }
+  ];
 }
