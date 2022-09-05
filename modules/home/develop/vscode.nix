@@ -13,6 +13,12 @@ let
     version = "1.0.5";
     sha256 = "CQVtMdt/fZcNIbH/KybJixnLqCsz5iF1U0k+GfL65Ok=";
   };
+  vscode-kotlin-lang-support = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+    name = "kotlin";
+    publisher = "fwcd";
+    version = "0.2.26";
+    sha256 = "djo1m0myIpEqz/jGyaUS2OROGnafY7YOI5T1sEneIK8=";
+  };
 in
 {
   programs.vscode.enable = true;
@@ -21,6 +27,7 @@ in
   programs.vscode.extensions = with pkgs.vscode-extensions; [
     vscode-hyper-term-theme
     vscode-todo-highlight
+    vscode-kotlin-lang-support
 
     esbenp.prettier-vscode
     ms-vscode-remote.remote-ssh
@@ -32,6 +39,7 @@ in
     bungcip.better-toml
     matklad.rust-analyzer
     ms-python.python
+    redhat.java
   ];
 
   programs.vscode.userSettings = {
@@ -65,8 +73,16 @@ in
 
     # Language specific
     "[nix]" = { "editor.defaultFormatter" = "jnoortheen.nix-ide"; };
-    "[kotlin]" = { "editor.tabSize" = 4; };
-    "[java]" = { "editor.tabSize" = 4; };
+
+    "[java]" = {
+      "editor.defaultFormatter" = "redhat.java";
+      "editor.tabSize" = 4;
+    };
+
+    "[kotlin]" = {
+      "editor.defaultFormatter" = "fwcd.kotlin";
+      "editor.tabSize" = 4;
+    };
 
     "[python]" = {
       "editor.defaultFormatter" = "ms-python.python";
