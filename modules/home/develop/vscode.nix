@@ -29,6 +29,7 @@ in
     vscode-todo-highlight
     vscode-kotlin-lang-support
 
+    WakaTime.vscode-wakatime
     esbenp.prettier-vscode
     ms-vscode-remote.remote-ssh
     ms-vsliveshare.vsliveshare
