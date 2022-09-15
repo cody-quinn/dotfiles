@@ -78,6 +78,7 @@
   environment.systemPackages = with pkgs; [
     unityhub
     mullvad
+    autorandr
   ];
 
   fonts.fonts = with pkgs; [
@@ -110,6 +111,48 @@
     "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
     "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
     "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
+  };
+
+  # Making a systemd service to automatically run autorandr when monitor layout changed
+  # FIXME: This script is mega mega janky... Future cody please fix, current cody needs sleep
+  systemd.user.services.nvidia-randrd = {
+    enable = true;
+    description = "autorandr daemon";
+    serviceConfig = {
+      Restart = "always";
+      RestartSec = 5;
+      ExecStart = lib.concatMapStrings (x: x + "\\n") (lib.splitString "\n" "/bin/sh -c \"
+          # Checking if the file \\\"/tmp/prev-monitors-connected\\\" exists, and if it doesnt creating it
+          if [ ! -f /tmp/prev-monitors-connected ]; then
+              echo \\\"1\\\" > /tmp/prev-monitors-connected
+          fi
+
+          # Setting the display variable
+          export DISPLAY=:0
+
+          # Checking the amount of monitors connnected and getting the results from our last check
+          PREV_MONITORS_CONN=$(cat /tmp/prev-monitors-connected)
+          CURR_MONITORS_CONN=$(/run/current-system/sw/bin/nvidia-settings -q dpys | grep \\\"connected\\\" | wc -l)
+
+          # Storing the results from our check so next time the script is ran it can query the result.
+          echo \\\"$CURR_MONITORS_CONN\\\" > /tmp/prev-monitors-connected
+
+          # If the number of monitors from this check and last check dont match up, we run \\\"autorandr\\\"
+          if [ $PREV_MONITORS_CONN != $CURR_MONITORS_CONN ]; then
+              echo \\\"Change in monitor layout detected, running autorandr\\\"
+              sleep 1
+
+              if [ $USER = \\\"root\\\" ]; then
+                  # If the user is root we run autorandr in batch mode to effect all users
+                  ${pkgs.autorandr}/bin/autorandr -c --batch > /dev/null
+              else
+                  # Otherwise we just run autorandr the normal way
+                  ${pkgs.autorandr}/bin/autorandr -c > /dev/null
+              fi
+
+              echo \\\"Monitor layout has been updated\\\"
+          fi\"");
+    };
   };
 
   # This value determines the NixOS release from which the default
