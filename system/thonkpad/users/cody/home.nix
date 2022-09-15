@@ -23,13 +23,9 @@
 
     # Development tools
     jetbrains.idea-ultimate
-    jetbrains.rider
-    jetbrains.datagrip
     android-studio
-    virt-manager
 
-    gradle
-    maven
+    virt-manager
     minikube
     kubectl
 
