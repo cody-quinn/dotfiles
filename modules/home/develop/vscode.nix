@@ -19,6 +19,12 @@ let
     version = "0.2.26";
     sha256 = "djo1m0myIpEqz/jGyaUS2OROGnafY7YOI5T1sEneIK8=";
   };
+  vscode-java-decompiler = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+    name = "java-decompiler";
+    publisher = "dgileadi";
+    version = "0.0.3";
+    sha256 = "VpfOHluImVGDwaZxIj7jjZf1nlVByp8xDYFQvGxRklc=";
+  };
 in
 {
   programs.vscode.enable = true;
@@ -28,6 +34,7 @@ in
     vscode-hyper-term-theme
     vscode-todo-highlight
     vscode-kotlin-lang-support
+    vscode-java-decompiler
 
     WakaTime.vscode-wakatime
     esbenp.prettier-vscode
@@ -66,6 +73,9 @@ in
     "rust-analyzer.inlayHints.chainingHints.enable" = false;
     "rust-analyzer.inlayHints.parameterHints.enable" = false;
     "rust-analyzer.checkOnSave.command" = "clippy";
+
+    # Java & Kotlin
+    "java.saveActions.organizeImports" = true;
 
     # Nix environment
     "nixEnvSelector.suggestion" = false;
