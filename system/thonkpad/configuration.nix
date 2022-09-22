@@ -99,6 +99,7 @@
   programs.slock.enable = true;
   programs.adb.enable = true;
   programs.steam.enable = true;
+  programs.noisetorch.enable = true;
 
   # Setting up docker
   sys.virtualisation.kvm.enable = true;
@@ -118,6 +119,7 @@
   systemd.user.services.nvidia-randrd = {
     enable = true;
     description = "autorandr daemon";
+    wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Restart = "always";
       RestartSec = 5;
