@@ -42,6 +42,7 @@ in
     ms-vsliveshare.vsliveshare
     eamodio.gitlens
     pkief.material-icon-theme
+    usernamehw.errorlens
     arrterian.nix-env-selector
     jnoortheen.nix-ide
     bungcip.better-toml
@@ -59,6 +60,7 @@ in
     "editor.fontLigatures" = true;
     "editor.fontFamily" = "'JetBrains Mono', 'Font Awesome 6 Free', 'monospace', monospace";
     "editor.fontSize" = 13.5;
+    "terminal.integrated.fontSize" = 11;
 
     # Formatting
     "editor.formatOnSave" = true;
