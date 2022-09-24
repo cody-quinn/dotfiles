@@ -25,6 +25,18 @@ let
     version = "0.0.3";
     sha256 = "VpfOHluImVGDwaZxIj7jjZf1nlVByp8xDYFQvGxRklc=";
   };
+  vscode-monkeypatch = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+    name = "monkey-patch";
+    publisher = "iocave";
+    version = "0.1.19";
+    sha256 = "+DqRMy8un62OXOi2GK0IQ4z+B73Wq/htx3o2hAniP5A=";
+  };
+  vscode-customize-ui = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+    name = "customize-ui";
+    publisher = "iocave";
+    version = "0.1.64";
+    sha256 = "FDymc/ueYQ1G4i8pPGFxVYLeFo6y2paaqVApCvt+IIA=";
+  };
 in
 {
   programs.vscode.enable = true;
@@ -35,6 +47,8 @@ in
     vscode-todo-highlight
     vscode-kotlin-lang-support
     vscode-java-decompiler
+    vscode-monkeypatch
+    vscode-customize-ui
 
     WakaTime.vscode-wakatime
     esbenp.prettier-vscode
@@ -43,6 +57,7 @@ in
     eamodio.gitlens
     pkief.material-icon-theme
     usernamehw.errorlens
+    vadimcn.vscode-lldb
     arrterian.nix-env-selector
     jnoortheen.nix-ide
     bungcip.better-toml
@@ -53,14 +68,23 @@ in
 
   programs.vscode.userSettings = {
     # Theme stuff
-    "window.menuBarVisibility" = "toggle";
+    "window.menuBarVisibility" = "hidden";
     "workbench.activityBar.visible" = false;
     "workbench.colorTheme" = "Hyper Term Black";
     "workbench.iconTheme" = "material-icon-theme";
     "editor.fontLigatures" = true;
     "editor.fontFamily" = "'JetBrains Mono', 'Font Awesome 6 Free', 'monospace', monospace";
     "editor.fontSize" = 13.5;
-    "terminal.integrated.fontSize" = 11;
+    "explorer.decorations.badges" = false;
+    "explorer.compactFolders" = false;
+    "breadcrumbs.enabled" = false;
+    "gitlens.codeLens.enabled" = false;
+
+    "workbench.colorCustomizations" = {
+      "[Hyper Term Black]" = {
+        "sideBarSectionHeader.background" = "#000000";
+      };
+    };
 
     # Formatting
     "editor.formatOnSave" = true;
@@ -70,6 +94,10 @@ in
     # Integrated terminal
     "terminal.integrated.shellIntegration.enabled" = false;
     "terminal.integrated.defaultProfile.linux" = "zsh";
+    "terminal.integrated.fontSize" = 11;
+
+    # Debugging
+    "debug.allowBreakpointsEverywhere" = true;
 
     # Rust analyzer
     "rust-analyzer.inlayHints.chainingHints.enable" = false;
