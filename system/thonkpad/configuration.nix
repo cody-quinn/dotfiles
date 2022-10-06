@@ -69,7 +69,7 @@
   users.users.cody = {
     isNormalUser = true;
     description = "Cody";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" "libvirtd" "kvm" ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };
