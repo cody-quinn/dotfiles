@@ -37,6 +37,12 @@ let
     version = "0.1.64";
     sha256 = "FDymc/ueYQ1G4i8pPGFxVYLeFo6y2paaqVApCvt+IIA=";
   };
+  vscode-fsharp-highlight-templates = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+    name = "vscode-template-fsharp-highlight";
+    publisher = "alfonsogarciacaro";
+    version = "1.7.0";
+    sha256 = "yht+l6PcGK1w+xShv6psrQ4WP1pV7B5ALSyTqn9oE6g=";
+  };
 in
 {
   programs.vscode.enable = true;
@@ -49,6 +55,7 @@ in
     vscode-java-decompiler
     vscode-monkeypatch
     vscode-customize-ui
+    vscode-fsharp-highlight-templates
 
     WakaTime.vscode-wakatime
     esbenp.prettier-vscode
@@ -62,6 +69,8 @@ in
     jnoortheen.nix-ide
     bungcip.better-toml
     matklad.rust-analyzer
+    ms-dotnettools.csharp
+    ionide.ionide-fsharp
     ms-python.python
     redhat.java
   ];
@@ -88,8 +97,7 @@ in
 
     # Formatting
     "editor.formatOnSave" = true;
-    "editor.defaultFormatter" = "esbenp.prettier-vscode";
-    "editor.tabSize" = 2;
+    "editor.tabSize" = 4;
 
     # Integrated terminal
     "terminal.integrated.shellIntegration.enabled" = false;
@@ -104,6 +112,9 @@ in
     "rust-analyzer.inlayHints.parameterHints.enable" = false;
     "rust-analyzer.checkOnSave.command" = "clippy";
 
+    # F# Ionide
+    "FSharp.inlayHints.enabled" = false;
+
     # Java & Kotlin
     "java.saveActions.organizeImports" = true;
 
@@ -113,26 +124,41 @@ in
     "nix.enableLanguageServer" = true;
 
     # Language specific
-    "[nix]" = { "editor.defaultFormatter" = "jnoortheen.nix-ide"; };
+    "[rust]" = { "editor.defaultFormatter" = "rust-lang.rust-analyzer"; };
+    "[fsharp]" = { "editor.defaultFormatter" = "Ionide.Ionide-fsharp"; };
+    "[csharp]" = { "editor.defaultFormatter" = "ms-dotnettools.csharp"; };
+    "[kotlin]" = { "editor.defaultFormatter" = "fwcd.kotlin"; };
+    "[java]" = { "editor.defaultFormatter" = "redhat.java"; };
+    "[python]" = { "editor.defaultFormatter" = "ms-python.python"; };
 
-    "[java]" = {
-      "editor.defaultFormatter" = "redhat.java";
-      "editor.tabSize" = 4;
+    "[nix]" = {
+      "editor.defaultFormatter" = "jnoortheen.nix-ide";
+      "editor.tabSize" = 2;
     };
 
-    "[kotlin]" = {
-      "editor.defaultFormatter" = "fwcd.kotlin";
-      "editor.tabSize" = 4;
+    "[json]" = {
+      "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      "editor.tabSize" = 2;
     };
 
-    "[python]" = {
-      "editor.defaultFormatter" = "ms-python.python";
-      "editor.tabSize" = 4;
+    "[javascript]" = {
+      "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      "editor.tabSize" = 2;
     };
 
-    "[rust]" = {
-      "editor.defaultFormatter" = "rust-lang.rust-analyzer";
-      "editor.tabSize" = 4;
+    "[javascriptreact]" = {
+      "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      "editor.tabSize" = 2;
+    };
+
+    "[typescript]" = {
+      "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      "editor.tabSize" = 2;
+    };
+
+    "[typescriptreact]" = {
+      "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      "editor.tabSize" = 2;
     };
   };
 
@@ -140,6 +166,10 @@ in
     {
       "key" = "ctrl+shift+s";
       "command" = "workbench.view.extension.liveshare";
+    }
+    {
+      "command" = "workbench.view.extension.ionide-fsharp";
+      "key" = "ctrl+shift+r";
     }
   ];
 }
