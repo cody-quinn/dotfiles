@@ -114,6 +114,8 @@ in
 
     # F# Ionide
     "FSharp.inlayHints.enabled" = false;
+    "FSharp.inlayHints.typeAnnotations" = false;
+    "FSharp.inlayHints.parameterNames" = false;
 
     # Java & Kotlin
     "java.saveActions.organizeImports" = true;
@@ -137,6 +139,11 @@ in
     };
 
     "[json]" = {
+      "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      "editor.tabSize" = 2;
+    };
+
+    "[jsonc]" = {
       "editor.defaultFormatter" = "esbenp.prettier-vscode";
       "editor.tabSize" = 2;
     };
