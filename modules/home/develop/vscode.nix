@@ -43,6 +43,12 @@ let
     version = "1.7.0";
     sha256 = "yht+l6PcGK1w+xShv6psrQ4WP1pV7B5ALSyTqn9oE6g=";
   };
+  vscode-wasm = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+    name = "vscode-wasm";
+    publisher = "dtsvet";
+    version = "1.3.1";
+    sha256 = "0Zn1lerqwDhxPbcVGN0yYL2IFRwK+ATioGkq9Ve8S3s=";
+  };
 in
 {
   programs.vscode.enable = true;
@@ -56,6 +62,7 @@ in
     vscode-monkeypatch
     vscode-customize-ui
     vscode-fsharp-highlight-templates
+    vscode-wasm
 
     WakaTime.vscode-wakatime
     esbenp.prettier-vscode
