@@ -80,7 +80,6 @@ in
     ionide.ionide-fsharp
     ms-python.python
     redhat.java
-    svelte.svelte-vscode
   ];
 
   programs.vscode.userSettings = {
@@ -187,4 +186,22 @@ in
       "key" = "ctrl+shift+r";
     }
   ];
+
+  # Making it possible to temporarily change config.json for a session
+  home.packages = [ pkgs.jq ];
+  home.activation = let 
+    userFilePath = "${config.xdg.configHome}/Code/User/settings.json";
+  in {
+    removeExistingVSCodeSettings = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+      rm -rf "${userFilePath}"
+    '';
+
+    overwriteVSCodeSymlink = let
+      userSettings = config.programs.vscode.userSettings;
+      jsonSettings = pkgs.writeText "tmp_vscode_settings" (builtins.toJSON userSettings);
+    in lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+      rm -rf "${userFilePath}"
+      cat ${jsonSettings} | ${pkgs.jq}/bin/jq --monochrome-output > "${userFilePath}"
+    '';
+  };
 }
