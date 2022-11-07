@@ -13,17 +13,20 @@
   home.packages = with pkgs; [
     # Desktop software
     (discord.override { nss = nss_latest; })
+    element-desktop
     qutebrowser
     krita
     bitwarden
     obs-studio
+    aseprite-unfree
 
     # Gamer time
-    polymc
+    prismlauncher
 
     # Development tools
     jetbrains.idea-ultimate
     android-studio
+    insomnia
 
     virt-manager
     minikube

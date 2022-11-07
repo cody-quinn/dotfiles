@@ -80,6 +80,7 @@ in
     ionide.ionide-fsharp
     ms-python.python
     redhat.java
+    svelte.svelte-vscode
   ];
 
   programs.vscode.userSettings = {

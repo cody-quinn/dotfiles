@@ -25,6 +25,7 @@
   # Networking
   networking.hostName = "thonkpad"; # Define your hostname.
   networking.networkmanager.enable = true;
+  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
   # Bluetooth
   hardware.bluetooth.enable = true;
@@ -78,6 +79,7 @@
   environment.systemPackages = with pkgs; [
     unityhub
     mullvad
+    cloudflare-warp
     autorandr
   ];
 
