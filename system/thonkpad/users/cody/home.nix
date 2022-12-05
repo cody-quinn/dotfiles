@@ -19,6 +19,8 @@
     bitwarden
     obs-studio
     aseprite-unfree
+    obsidian
+    arandr
 
     # Gamer time
     prismlauncher

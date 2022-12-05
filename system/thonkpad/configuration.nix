@@ -37,12 +37,16 @@
 
   # Configuring my display drivers & options
   services.xserver.videoDrivers = [ "nvidia" ];
+
   hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
+  hardware.opengl.driSupport32Bit = true;
 
   hardware.nvidia = {
     prime.offload.enable = false;
     prime.sync.enable = true;
     modesetting.enable = false;
+    powerManagement.enable = true;
   };
 
   # Enabling AwesomeWM
