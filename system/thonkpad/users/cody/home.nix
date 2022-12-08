@@ -39,7 +39,7 @@
 
     # CLI tools
     zathura
-    youtube-dl
+    yt-dlp
     mpv
 
     # Calculator
