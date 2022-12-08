@@ -37,6 +37,7 @@
 
   # Configuring my display drivers & options
   services.xserver.videoDrivers = [ "nvidia" ];
+  services.logind.lidSwitch = "ignore";
 
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
