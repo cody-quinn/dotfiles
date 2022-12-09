@@ -1,3 +1,5 @@
+autocmd Filetype hgcommit setlocal spell textwidth=72
+
 set guifont=JetBrains\ Mono:h7
 set clipboard+=unnamedplus
 set number
