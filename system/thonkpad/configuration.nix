@@ -32,7 +32,7 @@
   services.blueman.enable = true;
 
   # Timezone and internationalisation
-  time.timeZone = "America/Chicago";
+  time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.utf8";
 
   # Configuring my display drivers & options

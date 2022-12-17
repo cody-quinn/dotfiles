@@ -53,7 +53,7 @@ in
 {
   programs.vscode.enable = true;
 
-  programs.vscode.mutableExtensionsDir = false;
+  programs.vscode.mutableExtensionsDir = true;
   programs.vscode.extensions = with pkgs.vscode-extensions; [
     vscode-hyper-term-theme
     vscode-todo-highlight
