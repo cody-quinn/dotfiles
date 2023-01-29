@@ -78,7 +78,6 @@ in
     matklad.rust-analyzer
     ms-dotnettools.csharp
     ionide.ionide-fsharp
-    ms-python.python
     redhat.java
   ];
 
@@ -138,7 +137,6 @@ in
     "[csharp]" = { "editor.defaultFormatter" = "ms-dotnettools.csharp"; };
     "[kotlin]" = { "editor.defaultFormatter" = "fwcd.kotlin"; };
     "[java]" = { "editor.defaultFormatter" = "redhat.java"; };
-    "[python]" = { "editor.defaultFormatter" = "ms-python.python"; };
 
     "[nix]" = {
       "editor.defaultFormatter" = "jnoortheen.nix-ide";

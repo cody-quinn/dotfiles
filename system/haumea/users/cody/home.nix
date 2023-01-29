@@ -15,32 +15,8 @@
     # Desktop software
     (discord.override { nss = nss_latest; })
     element-desktop
-    krita
     bitwarden
-    obs-studio
-    aseprite-unfree
-    obsidian
     arandr
-
-    # Gamer time
-    prismlauncher
-
-    # Development tools
-    jetbrains.idea-ultimate
-    android-studio
-    insomnia
-
-    virt-manager
-    minikube
-    kubectl
-
-    # Gnome software
-    baobab
-
-    # CLI tools
-    zathura
-    yt-dlp
-    mpv
 
     # Calculator
     python310
@@ -64,8 +40,8 @@
   #
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "22.05";
+  # changes in each release. 
+  home.stateVersion = "22.11";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

@@ -24,6 +24,7 @@
     {
       apps = nixinate.nixinate.x86_64-linux self;
       nixosConfigurations = {
+        # My laptop
         thonkpad = nixpkgs.lib.nixosSystem {
           inherit system;
 
@@ -34,6 +35,16 @@
             (import ./system/thonkpad/configuration.nix)
           ];
         };
+        # My desktop PC
+        haumea = nixpkgs.lib.nixosSystem {
+          inherit system;
+
+          modules = [
+            home-manager.nixosModules.home-manager
+            (import ./system/haumea/configuration.nix)
+          ];
+        };
+        # My personal server
         buzzbox = nixpkgs.lib.nixosSystem {
           inherit system;
 
