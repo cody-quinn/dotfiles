@@ -39,6 +39,13 @@
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.utf8";
 
+  # Disabling power management & sleep
+  powerManagement.enable = false;
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
