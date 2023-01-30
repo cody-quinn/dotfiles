@@ -12,7 +12,7 @@
   home.homeDirectory = "/home/cody";
 
   home.packages = with pkgs; [
-    # Casual
+    # Desktop
     (discord.override { nss = nss_latest; })
     element-desktop
     krita

@@ -6,9 +6,7 @@
     thunderbird
     alacritty
     neovide
-
-    gnome.nautilus
-    gnome.gnome-disk-utility
+    cinnamon.nemo
 
     # Launchers
     rofi
