@@ -40,6 +40,7 @@
           inherit system;
 
           modules = [
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [ prism-launcher.overlay ]; })
             home-manager.nixosModules.home-manager
             (import ./system/haumea/configuration.nix)
           ];

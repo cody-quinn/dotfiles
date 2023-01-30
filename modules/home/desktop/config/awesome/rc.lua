@@ -218,7 +218,12 @@ clientkeys = gears.table.join(
     awful.key({ modkey,           }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "space",  awful.client.floating.toggle),
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen() end),
-    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop end)
+    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop end),
+    awful.key({ modkey,           }, "m",      
+        function (c) 
+            c.maximized = not c.maximized 
+            c:raise()
+        end)
 )
 
 -- Bind all key numbers to tags.

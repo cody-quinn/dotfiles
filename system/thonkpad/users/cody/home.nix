@@ -19,8 +19,8 @@
     bitwarden
     obs-studio
     aseprite-unfree
-    obsidian
     arandr
+    baobab
 
     # Gamer time
     prismlauncher
@@ -33,9 +33,6 @@
     virt-manager
     minikube
     kubectl
-
-    # Gnome software
-    baobab
 
     # CLI tools
     zathura
