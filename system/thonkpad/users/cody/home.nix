@@ -18,23 +18,22 @@
     krita
     bitwarden
     obs-studio
-    aseprite-unfree
     arandr
     baobab
 
-    # Gamer time
+    # Gaming
     prismlauncher
 
-    # Development tools
+    # Programming
     jetbrains.idea-ultimate
-    android-studio
     insomnia
 
+    # Virtualization
     virt-manager
     minikube
     kubectl
 
-    # CLI tools
+    # Command-line
     zathura
     yt-dlp
     mpv

@@ -80,7 +80,6 @@
   # Packages relegated to the entire system
   environment.systemPackages = with pkgs; [
     unityhub
-    mullvad
     cloudflare-warp
   ];
 
