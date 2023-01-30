@@ -14,6 +14,7 @@
     unzip
     zip
     exa
+    neofetch
   ];
 
   environment.shells = [ pkgs.zsh pkgs.bash ];
