@@ -46,21 +46,23 @@
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
 
-  # Enable the X11 windowing system.
+  # Enable and configure the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.layout = "us";
+  services.xserver.xkbVariant = "";
 
+  services.xserver.libinput = {
+    enable = true;
+    mouse.accelProfile = "flat";
+  };
+
+  # Enable hardware acceleration
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
 
   # Enable the GNOME Desktop Environment.
   sys.desktop.awesome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
