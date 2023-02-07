@@ -3,6 +3,7 @@
 {
   imports = [
     ./awesome.nix
+    ./i18n.nix
   ];
 
   config = {
