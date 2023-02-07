@@ -7,4 +7,10 @@
     fcitx5-chinese-addons
     fcitx5-rime
   ];
+
+  services.xserver.displayManager.sessionCommands = ''
+    export XMODIFIERS=@im=fcitx
+    export QT_IM_MODULE=fcitx
+    export GTK_IM_MODULE=fcitx   
+  '';
 }
