@@ -56,6 +56,24 @@
     mouse.accelProfile = "flat";
   };
 
+  services.xserver.xrandrHeads = [
+    {
+      output = "DisplayPort-0";
+      monitorConfig = ''
+        Option "PreferredMode" "1920x1080"
+	Option "Position" "320 0"
+      '';
+    }
+    {
+      output = "HDMI-A-0";
+      primary = true;
+      monitorConfig = ''
+        Option "PreferredMode" "2560x1080"
+	Option "Position" "0 1080"
+      '';
+    }
+  ];
+
   # Enable hardware acceleration
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
