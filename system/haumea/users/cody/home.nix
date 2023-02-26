@@ -20,6 +20,7 @@
     obs-studio
     arandr
     baobab
+    libresprite
 
     # Gaming
     prismlauncher
