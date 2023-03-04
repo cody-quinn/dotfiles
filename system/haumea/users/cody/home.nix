@@ -21,6 +21,7 @@
     arandr
     baobab
     libresprite
+    openrgb
 
     # Gaming
     prismlauncher

@@ -17,6 +17,9 @@
   home-manager.useUserPackages = true;
   home-manager.users.cody = import ./users/cody/home.nix;
 
+  # Kernel Modules
+  boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
+
   # Bootloader
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
