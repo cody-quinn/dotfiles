@@ -43,6 +43,7 @@
   programs.git = {
     userName = "Cody";
     userEmail = "cody@codyq.dev";
+    signing.key = "1DE927325E9932E7";
   };
 
   programs.gpg.enable = true;
