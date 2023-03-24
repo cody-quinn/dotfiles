@@ -20,6 +20,7 @@
     obs-studio
     arandr
     baobab
+    qbittorrent
 
     # Gaming
     prismlauncher
