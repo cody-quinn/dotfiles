@@ -169,7 +169,7 @@ in
             desc = 'LSP: ' .. desc
           end
 
-          vim.keymap.set('n', keys, func, { buffer = ev.buf, desc = desc })
+          vim.keymap.set('n', keys, func, { silent = true, buffer = ev.buf, desc = desc })
         end
 
         nmap('<leader>rn', vim.lsp.buf.rename     , '[RN] Rename')
@@ -199,6 +199,7 @@ in
         },
       },
       server = {
+        cmd = { '${pkgs.rust-analyzer}/bin/rust-analyzer' },
         on_attach = function(_, bufnr)
           local rt = require('rust-tools')
           local nmap = function(keys, func, desc)
@@ -206,7 +207,7 @@ in
               desc = 'LSP: ' .. desc
             end
 
-            vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+            vim.keymap.set('n', keys, func, { silent = true, buffer = bufnr, desc = desc })
           end
 
           nmap('<leader>Rr', ':FloatermNew --autoclose=0 cargo run<CR>'                   , 'Run Project')
@@ -220,6 +221,9 @@ in
           ['rust-analyzer'] = {
             check = {
               command = "clippy",
+            },
+            procMacro = {
+              enable = true,
             },
           },
         },
