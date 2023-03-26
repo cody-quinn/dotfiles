@@ -4,5 +4,6 @@
   imports = [
     ./software.nix
     ./vscode.nix
+    ./neovim.nix
   ];
 }

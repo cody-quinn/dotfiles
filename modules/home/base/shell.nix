@@ -23,7 +23,6 @@ in
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
       shellAliases = {
-        vim = "nvim";
         l = "exa";
         ls = "exa -l --icons --group-directories-first";
         la = "exa -la --icons --group-directories-first";
