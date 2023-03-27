@@ -64,7 +64,7 @@
       output = "DisplayPort-0";
       monitorConfig = ''
         Option "PreferredMode" "1920x1080"
-	Option "Position" "320 0"
+        Option "Position" "320 0"
       '';
     }
     {
@@ -72,7 +72,7 @@
       primary = true;
       monitorConfig = ''
         Option "PreferredMode" "2560x1080"
-	Option "Position" "0 1080"
+        Option "Position" "0 1080"
       '';
     }
   ];

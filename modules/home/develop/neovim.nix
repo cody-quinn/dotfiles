@@ -199,7 +199,6 @@ in
         },
       },
       server = {
-        cmd = { '${pkgs.rust-analyzer}/bin/rust-analyzer' },
         on_attach = function(_, bufnr)
           local rt = require('rust-tools')
           local nmap = function(keys, func, desc)
