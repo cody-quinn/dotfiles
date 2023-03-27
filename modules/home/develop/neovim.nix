@@ -18,6 +18,7 @@ in
     which-key-nvim
     vim-sleuth
     fidget-nvim
+    comment-nvim
 
     # Terminal integration
     vim-floaterm
@@ -84,6 +85,7 @@ in
     -- Activating misc plugins
     require('fidget').setup {}
     require('which-key').setup {}
+    require('Comment').setup {}
 
     -- Configure Lualine
     require('lualine').setup {
@@ -179,6 +181,9 @@ in
         nmap('gd', vim.lsp.buf.definition    , '[GD] Goto Definition')
         nmap('gr', tsb.lsp_references        , '[GR] Goto References')
         nmap('gI', vim.lsp.buf.implementation, '[GI] Goto Implementation')
+
+        nmap('K'    , vim.lsp.buf.hover         , 'Hover Documentation')
+        nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
       end,
     })
 
