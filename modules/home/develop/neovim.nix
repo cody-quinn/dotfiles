@@ -12,6 +12,9 @@ in
 
   # Installing neovim plugins
   programs.neovim.plugins = with pkgs.vimPlugins; [
+    plenary-nvim
+    nui-nvim
+
     onedark-nvim
     lualine-nvim
     indent-blankline-nvim
@@ -36,6 +39,13 @@ in
     # Telescope
     telescope-nvim
     telescope-fzf-native-nvim
+
+    # Neotree
+    neo-tree-nvim
+    nvim-web-devicons
+
+    # Cokeline
+    nvim-cokeline
 
     # Language Support
     nvim-lspconfig
@@ -104,8 +114,8 @@ in
 
     -- Configure Floaterm
     vim.cmd([[
-      nnoremap <silent> <F1> :FloatermToggle<CR>
-      tnoremap <silent> <F1> <C-\><C-n>:FloatermToggle<CR>
+      nnoremap <silent> <F1> <CMD>FloatermToggle<CR>
+      tnoremap <silent> <F1> <C-\><C-n><CMD>FloatermToggle<CR>
     ]])
 
     -- Configure Gitsigns
@@ -143,6 +153,47 @@ in
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
     end
+
+    -- Configure Neotree
+    require('neo-tree').setup {
+      window = {
+        mappings = {
+          ['l'] = "open",
+        },
+      },
+    }
+
+    vim.cmd([[
+      nnoremap <silent> <F2> <CMD>NeoTreeFloatToggle<CR>
+      tnoremap <silent> <F2> <C-\><C-n><CMD>NeoTreeFloatToggle<CR>
+    ]])
+
+    -- Configure Cokeline
+    local get_hex = require('cokeline/utils').get_hex
+
+    require('cokeline').setup {
+      default_hl = {
+        fg = function(buffer)
+          if buffer.is_focused then
+            return get_hex('ColorColumn', 'bg')
+          else
+            return get_hex('Normal', 'fg')
+          end
+        end,
+        bg = function(buffer)
+          if buffer.is_focused then
+            return get_hex('Normal', 'fg')
+          else
+            return get_hex('ColorColumn', 'bg')
+          end
+        end,
+      },
+      components = {
+        {
+          text = function(buffer) return ' ' .. buffer.filename .. ' ' end,
+        },
+      },
+    } 
 
     -- Configure Treesitter
     require('nvim-treesitter.configs').setup {
@@ -214,10 +265,10 @@ in
             vim.keymap.set('n', keys, func, { silent = true, buffer = bufnr, desc = desc })
           end
 
-          nmap('<leader>Rr', ':FloatermNew --autoclose=0 cargo run<CR>'                   , 'Run Project')
-          nmap('<leader>Rt', ':FloatermNew --autoclose=0 cargo test<CR>'                  , 'Run Tests')
-          nmap('<leader>Rc', ':FloatermNew --autoclose=0 cargo clippy<CR>'                , 'Run Clippy')
-          nmap('<leader>RC', ':FloatermNew --autoclose=0 cargo deny check -A warnings<CR>', 'Run Cargo Deny')
+          nmap('<leader>Rr', '<CMD>FloatermNew --autoclose=0 cargo run<CR>'                   , 'Run Project')
+          nmap('<leader>Rt', '<CMD>FloatermNew --autoclose=0 cargo test<CR>'                  , 'Run Tests')
+          nmap('<leader>Rc', '<CMD>FloatermNew --autoclose=0 cargo clippy<CR>'                , 'Run Clippy')
+          nmap('<leader>RC', '<CMD>FloatermNew --autoclose=0 cargo deny check -A warnings<CR>', 'Run Cargo Deny')
 
           nmap('gM', rt.expand_macro.expand_macro, 'Expand Macro')
         end,
@@ -284,5 +335,10 @@ in
     vim.keymap.set('n', ']d'       , vim.diagnostic.goto_next , { desc = "Go to next diagnostic message" })
     vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
     vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostic list" })
+
+    -- Buffer nav keymaps
+    vim.keymap.set('n', '<leader>bn', '<CMD>bn<CR>')
+    vim.keymap.set('n', '<leader>bp', '<CMD>bp<CR>')
+    vim.keymap.set('n', '<leader>bc', '<CMD>bd<CR>')
   '';
 }
