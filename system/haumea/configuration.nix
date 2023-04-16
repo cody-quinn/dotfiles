@@ -129,6 +129,7 @@
   programs.dconf.enable = true;
   programs.slock.enable = true;
   programs.adb.enable = true;
+  programs.steam.enable = true;
   programs.noisetorch.enable = true;
 
   # Setting up docker
