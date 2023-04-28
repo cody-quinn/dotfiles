@@ -63,8 +63,8 @@
     {
       output = "DisplayPort-0";
       monitorConfig = ''
-        Option "PreferredMode" "1920x1080"
-        Option "Position" "320 0"
+        Option "PreferredMode" "2560x1080"
+        Option "Position" "0 0"
       '';
     }
     {
@@ -76,6 +76,15 @@
       '';
     }
   ];
+  
+  # Setup drawing tablet
+  hardware.opentabletdriver.enable = true;
+
+  # Enable printing support
+  services.printing.enable = true;
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
+  services.avahi.openFirewall = true;
 
   # Enable hardware acceleration
   hardware.opengl.enable = true;
@@ -84,9 +93,6 @@
 
   # Enable the GNOME Desktop Environment.
   sys.desktop.awesome.enable = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -135,15 +141,6 @@
   # Setting up docker
   sys.virtualisation.kvm.enable = true;
   sys.virtualisation.docker.enable = true;
-
-  # Setting default applications
-  xdg.mime.defaultApplications = {
-    "text/html" = "org.qutebrowser.qutebrowser.desktop";
-    "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
-    "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
-    "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
-    "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

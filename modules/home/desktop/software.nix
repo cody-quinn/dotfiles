@@ -7,6 +7,8 @@
     alacritty
     neovide
     cinnamon.nemo
+    bitwarden
+    qbittorrent
 
     # Launchers
     rofi
@@ -15,8 +17,12 @@
     # Utilities
     flameshot
     pavucontrol
+    arandr
+    baobab
     xclip
     feh
+    mpv
+    zathura
 
     # CLI Tools
     pamixer

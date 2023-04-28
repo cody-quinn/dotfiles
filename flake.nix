@@ -7,10 +7,12 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager.url = "github:nix-community/home-manager";
     nixinate.url = "github:matthewcroughan/nixinate";
+
     prism-launcher.url = "github:PrismLauncher/PrismLauncher";
+    iamb.url = "github:ulyssa/iamb";
   };
 
-  outputs = { self, flake-utils, nixpkgs, home-manager, nixos-hardware, prism-launcher, nixinate }:
+  outputs = { self, flake-utils, nixpkgs, home-manager, nixos-hardware, prism-launcher, iamb, nixinate, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -19,6 +21,12 @@
           allowUnfree = true;
         };
       };
+
+      overlays = [
+        (_: p: { iamb = iamb.packages.${p.system}.default; })
+
+        prism-launcher.overlay
+      ];
     in
     rec
     {
@@ -29,7 +37,10 @@
           inherit system;
 
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ prism-launcher.overlay ]; })
+            {
+              nixpkgs.overlays = overlays;
+            }
+
             nixos-hardware.nixosModules.lenovo-thinkpad-p50
             home-manager.nixosModules.home-manager
             (import ./system/thonkpad/configuration.nix)
@@ -40,26 +51,12 @@
           inherit system;
 
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ prism-launcher.overlay ]; })
+            {
+              nixpkgs.overlays = overlays;
+            }
+
             home-manager.nixosModules.home-manager
             (import ./system/haumea/configuration.nix)
-          ];
-        };
-        # My personal server
-        buzzbox = nixpkgs.lib.nixosSystem {
-          inherit system;
-
-          modules = [
-            home-manager.nixosModules.home-manager
-            (import ./system/buzzbox/configuration.nix)
-            {
-              _module.args.nixinate = {
-                host = "5.78.41.254";
-                sshUser = "cody";
-                buildOn = "remote";
-                hermetic = false;
-              };
-            }
           ];
         };
       };

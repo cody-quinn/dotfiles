@@ -23,6 +23,9 @@ in
     fidget-nvim
     comment-nvim
 
+    # Nix integration
+    direnv-vim
+
     # Terminal integration
     vim-floaterm
 

@@ -12,14 +12,14 @@
   home.homeDirectory = "/home/cody";
 
   home.packages = with pkgs; [
-    # Desktop
+    # Communication
     (discord.override { nss = nss_latest; })
     element-desktop
+    iamb
+
+    # Misc
     krita
-    bitwarden
     obs-studio
-    arandr
-    baobab
     libresprite
     openrgb
 
@@ -30,11 +30,6 @@
     virt-manager
     minikube
     kubectl
-
-    # Command-line
-    zathura
-    yt-dlp
-    mpv
 
     # Calculator
     python310

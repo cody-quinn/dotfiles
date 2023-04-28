@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./apple.nix
+    ./keyboard.nix
     ./nixos.nix
     ./software.nix
   ];

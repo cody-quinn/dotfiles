@@ -22,6 +22,11 @@ in
       enable = true;
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
+      dirHashes = {
+        p = "$HOME/Projects";
+        doc = "$HOME/Documents";
+        dwn = "$HOME/Downloads";
+      };
       shellAliases = {
         l = "exa";
         ls = "exa -l --icons --group-directories-first";
@@ -40,6 +45,9 @@ in
       localVariables = {
         PROMPT = cfg.prefix + " ▲ %c " + cfg.suffix;
       };
+      initExtra = ''
+        eval "$(direnv hook zsh)"
+      '';
     };
   };
 }

@@ -107,15 +107,6 @@
   sys.virtualisation.kvm.enable = true;
   sys.virtualisation.docker.enable = true;
 
-  # Setting default applications
-  xdg.mime.defaultApplications = {
-    "text/html" = "org.qutebrowser.qutebrowser.desktop";
-    "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
-    "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
-    "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
-    "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
-  };
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

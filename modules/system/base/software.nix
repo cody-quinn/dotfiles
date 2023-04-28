@@ -2,6 +2,8 @@
 
 {
   environment.systemPackages = with pkgs; [
+    direnv
+    ranger
     wget
     curl
     git
@@ -14,7 +16,10 @@
     zip
     exa
     neofetch
+    gay
+    yt-dlp
   ];
 
   environment.shells = [ pkgs.zsh pkgs.bash ];
+  environment.pathsToLink = [ "/share/zsh" ];
 }

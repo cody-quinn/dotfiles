@@ -24,5 +24,23 @@ in
         luarocks
       ];
     };
+
+    # Setting default applications
+    xdg.mime.defaultApplications = {
+      "inode/directory" = "nemo.desktop";
+
+      "text/html" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
+      "application/pdf" = "org.pwmt.zathura.desktop";
+
+      "image/png" = "feh.desktop";
+      "image/jpeg" = "feh.desktop";
+      "image/gif" = "feh.desktop";
+      "image/webm" = "feh.desktop";
+      "video/mp4" = "mpv.desktop";
+    };
   };
 }
