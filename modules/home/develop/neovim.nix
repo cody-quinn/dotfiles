@@ -53,6 +53,7 @@ in
     # Language Support
     nvim-lspconfig
     rust-tools-nvim
+    Ionide-vim
 
     # Autocompletion
     luasnip
@@ -91,6 +92,11 @@ in
     vim.wo.number = true
     vim.wo.relativenumber = true
     vim.wo.signcolumn = 'yes'
+
+    vim.o.tabstop = 4
+    vim.o.softtabstop = 4
+    vim.o.shiftwidth = 4
+    vim.o.expandtab = true
 
     -- Settings for graphical environments like neovide
     vim.o.guifont = 'JetBrains Mono:h10'
