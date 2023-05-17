@@ -25,7 +25,7 @@
       overlays = [
         (_: p: { iamb = iamb.packages.${p.system}.default; })
 
-        prism-launcher.overlay
+        prism-launcher.overlays.default
       ];
     in
     rec

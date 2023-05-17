@@ -25,6 +25,7 @@
 
     # Gaming
     prismlauncher
+    osu-lazer-bin
 
     # Virtualization
     virt-manager
