@@ -116,7 +116,9 @@
   };
 
   # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = with pkgs; [
+    cloudflare-warp
+  ];
 
   fonts.fonts = with pkgs; [
     jetbrains-mono
