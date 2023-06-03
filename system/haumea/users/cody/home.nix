@@ -15,7 +15,6 @@
     # Communication
     (discord.override { nss = nss_latest; })
     element-desktop
-    iamb
 
     # Misc
     krita

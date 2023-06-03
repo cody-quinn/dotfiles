@@ -22,7 +22,6 @@
 
   # Bootloader
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.useOSProber = true;
@@ -61,14 +60,14 @@
 
   services.xserver.xrandrHeads = [
     {
-      output = "DisplayPort-0";
+      output = "DP-1";
       monitorConfig = ''
         Option "PreferredMode" "2560x1080"
         Option "Position" "0 0"
       '';
     }
     {
-      output = "HDMI-A-0";
+      output = "HDMI-1";
       primary = true;
       monitorConfig = ''
         Option "PreferredMode" "2560x1080"
