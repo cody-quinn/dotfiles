@@ -15,13 +15,16 @@ in
     plenary-nvim
     nui-nvim
 
-    onedark-nvim
     lualine-nvim
     indent-blankline-nvim
     which-key-nvim
     vim-sleuth
     fidget-nvim
     comment-nvim
+
+    # Color scheme
+    gruvbox-nvim
+    onedark-nvim
 
     # Nix integration
     direnv-vim
@@ -63,14 +66,22 @@ in
   ];
 
   # Configuring neovim and installing packages required by our config
-  programs.neovim.extraPackages = with pkgs; [ ];
+  programs.neovim.extraPackages = with pkgs; [ 
+    python310Packages.python-lsp-server
+  ];
+
   programs.neovim.extraLuaConfig = ''
     -- Setting <space> as leader key
     vim.g.mapleader = ' '
     vim.g.maplocalleader = ' '
 
     -- Setting the color scheme
-    vim.cmd.colorscheme 'onedark'
+    require('gruvbox').setup {
+      contrast = "hard"
+    }
+
+    vim.o.background = 'dark'
+    vim.cmd.colorscheme 'gruvbox'
 
     -- Generic settings for neovim
     vim.o.mouse = 'a'
@@ -292,6 +303,15 @@ in
           },
         },
       },
+    }
+
+    -- Configure Python support
+    lspconfig.pylsp.setup { 
+      on_attach = function()
+        completion.on_attach()
+        -- Python specifically isn't setting omnifunc correctly, ftplugin conflict
+        vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+      end
     }
 
     -- Configure Auto Complete
