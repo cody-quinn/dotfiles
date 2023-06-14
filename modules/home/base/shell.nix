@@ -28,6 +28,7 @@ in
         dwn = "$HOME/Downloads";
       };
       shellAliases = {
+        o = "xdg-open";
         l = "exa";
         ls = "exa -l --icons --group-directories-first";
         la = "exa -la --icons --group-directories-first";

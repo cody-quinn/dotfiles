@@ -15,6 +15,9 @@
     rofi
     rofimoji
 
+    wofi
+    wofi-emoji
+
     # Utilities
     flameshot
     pavucontrol

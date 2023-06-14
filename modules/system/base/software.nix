@@ -18,6 +18,7 @@
     neofetch
     gay
     yt-dlp
+    graphviz
   ];
 
   environment.shells = [ pkgs.zsh pkgs.bash ];

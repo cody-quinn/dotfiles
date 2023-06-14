@@ -67,6 +67,9 @@ in
 
   # Configuring neovim and installing packages required by our config
   programs.neovim.extraPackages = with pkgs; [ 
+    ripgrep
+
+    # LSPs
     python310Packages.python-lsp-server
   ];
 
@@ -82,6 +85,30 @@ in
 
     vim.o.background = 'dark'
     vim.cmd.colorscheme 'gruvbox'
+
+    -- Setting web devicons
+    require('nvim-web-devicons').setup {
+      override_by_filename = {
+        ["license-mit"] = {
+          icon = "",
+          color = "#d0bf41",
+          cterm_color = "185",
+          name = "License",
+        },
+        ["license-apache"] = {
+          icon = "",
+          color = "#d0bf41",
+          cterm_color = "185",
+          name = "License",
+        },
+      };
+
+      override_by_extension = {
+        ["rs"] = {
+          icon = "",
+        },
+      };
+    }
 
     -- Generic settings for neovim
     vim.o.mouse = 'a'

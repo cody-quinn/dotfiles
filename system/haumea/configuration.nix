@@ -1,4 +1,4 @@
-{ config, pkgs, lib, home-manager, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports = [
@@ -15,6 +15,7 @@
   # Manage the user accounts using home manager
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { inherit inputs; };
   home-manager.users.cody = import ./users/cody/home.nix;
 
   # Kernel Modules
@@ -48,33 +49,8 @@
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
 
-  # Enable and configure the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbVariant = "";
-
-  services.xserver.libinput = {
-    enable = true;
-    mouse.accelProfile = "flat";
-  };
-
-  services.xserver.xrandrHeads = [
-    {
-      output = "DP-1";
-      monitorConfig = ''
-        Option "PreferredMode" "2560x1080"
-        Option "Position" "0 0"
-      '';
-    }
-    {
-      output = "HDMI-1";
-      primary = true;
-      monitorConfig = ''
-        Option "PreferredMode" "2560x1080"
-        Option "Position" "0 1080"
-      '';
-    }
-  ];
+  # Configure the X11 windowing system.
+  services.xserver.displayManager.startx.enable = true;
   
   # Setup drawing tablet
   hardware.opentabletdriver.enable = true;
@@ -91,7 +67,24 @@
   hardware.opengl.driSupport32Bit = true;
 
   # Enable the GNOME Desktop Environment.
-  sys.desktop.awesome.enable = true;
+  # sys.desktop.awesome.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = pkgs.hyprland;
+    xwayland.enable = true;
+  };
+
+  programs.waybar = {
+    enable = true;
+    package = pkgs.waybar-hyprland;
+  };
+
+  services.dbus.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+  };
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -116,13 +109,12 @@
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    cloudflare-warp
-  ];
+    hyprpaper
+    wl-clipboard
+    grim
+    slurp
 
-  fonts.fonts = with pkgs; [
-    jetbrains-mono
-    twemoji-color-font
-    font-awesome
+    cloudflare-warp
   ];
 
   # Programs and configurating them
