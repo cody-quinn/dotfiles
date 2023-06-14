@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    qutebrowser
+    qutebrowser-qt6
   ];
 
   home.file.".config/qutebrowser/config.py".text = ''
@@ -27,7 +27,7 @@
 
     c.content.geolocation = False
     c.content.notifications.enabled = False
-    c.content.javascript.can_access_clipboard = True
+    c.content.javascript.clipboard = "access-paste"
     c.content.pdfjs = True
 
     c.content.blocking.enabled = True
