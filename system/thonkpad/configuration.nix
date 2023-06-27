@@ -68,6 +68,16 @@
     jack.enable = true;
   };
 
+  # Setup OpenSSH
+  services.openssh = {
+    enable = true;
+
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.cody = {
     isNormalUser = true;
@@ -75,6 +85,11 @@
     extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" "libvirtd" "kvm" ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
+
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEVUY3XYjzUdW6Nm7psFrlIEA0OmRP5CEIWLl9D8dOy cody@codyq.dev"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINRKLEellJCKQZ80YXAnMmIegA5WQLGN/P38TO1lxBRJ codyquinn1122@gmail.com"
+    ];
   };
 
   # Packages relegated to the entire system
