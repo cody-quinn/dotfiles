@@ -15,13 +15,16 @@ in
     plenary-nvim
     nui-nvim
 
-    onedark-nvim
     lualine-nvim
     indent-blankline-nvim
     which-key-nvim
     vim-sleuth
     fidget-nvim
     comment-nvim
+
+    # Color scheme
+    gruvbox-nvim
+    onedark-nvim
 
     # Nix integration
     direnv-vim
@@ -53,6 +56,7 @@ in
     # Language Support
     nvim-lspconfig
     rust-tools-nvim
+    Ionide-vim
 
     # Autocompletion
     luasnip
@@ -62,14 +66,49 @@ in
   ];
 
   # Configuring neovim and installing packages required by our config
-  programs.neovim.extraPackages = with pkgs; [ ];
+  programs.neovim.extraPackages = with pkgs; [ 
+    ripgrep
+
+    # LSPs
+    python310Packages.python-lsp-server
+  ];
+
   programs.neovim.extraLuaConfig = ''
     -- Setting <space> as leader key
     vim.g.mapleader = ' '
     vim.g.maplocalleader = ' '
 
     -- Setting the color scheme
-    vim.cmd.colorscheme 'onedark'
+    require('gruvbox').setup {
+      contrast = "hard"
+    }
+
+    vim.o.background = 'dark'
+    vim.cmd.colorscheme 'gruvbox'
+
+    -- Setting web devicons
+    require('nvim-web-devicons').setup {
+      override_by_filename = {
+        ["license-mit"] = {
+          icon = "",
+          color = "#d0bf41",
+          cterm_color = "185",
+          name = "License",
+        },
+        ["license-apache"] = {
+          icon = "",
+          color = "#d0bf41",
+          cterm_color = "185",
+          name = "License",
+        },
+      };
+
+      override_by_extension = {
+        ["rs"] = {
+          icon = "",
+        },
+      };
+    }
 
     -- Generic settings for neovim
     vim.o.mouse = 'a'
@@ -91,6 +130,11 @@ in
     vim.wo.number = true
     vim.wo.relativenumber = true
     vim.wo.signcolumn = 'yes'
+
+    vim.o.tabstop = 4
+    vim.o.softtabstop = 4
+    vim.o.shiftwidth = 4
+    vim.o.expandtab = true
 
     -- Settings for graphical environments like neovide
     vim.o.guifont = 'JetBrains Mono:h10'
@@ -286,6 +330,15 @@ in
           },
         },
       },
+    }
+
+    -- Configure Python support
+    lspconfig.pylsp.setup { 
+      on_attach = function()
+        completion.on_attach()
+        -- Python specifically isn't setting omnifunc correctly, ftplugin conflict
+        vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+      end
     }
 
     -- Configure Auto Complete

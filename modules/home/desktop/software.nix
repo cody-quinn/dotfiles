@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    chromium
     firefox
     thunderbird
     alacritty
@@ -13,6 +14,9 @@
     # Launchers
     rofi
     rofimoji
+
+    wofi
+    wofi-emoji
 
     # Utilities
     flameshot

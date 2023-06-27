@@ -6,13 +6,15 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager.url = "github:nix-community/home-manager";
+
     nixinate.url = "github:matthewcroughan/nixinate";
 
+    hyprland.url = "github:hyprwm/Hyprland";
     prism-launcher.url = "github:PrismLauncher/PrismLauncher";
     iamb.url = "github:ulyssa/iamb";
   };
 
-  outputs = { self, flake-utils, nixpkgs, home-manager, nixos-hardware, prism-launcher, iamb, nixinate, ... }:
+  outputs = { self, flake-utils, nixpkgs, home-manager, nixos-hardware, hyprland, prism-launcher, iamb, nixinate, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -25,7 +27,8 @@
       overlays = [
         (_: p: { iamb = iamb.packages.${p.system}.default; })
 
-        prism-launcher.overlay
+        hyprland.overlays.default
+        prism-launcher.overlays.default
       ];
     in
     rec
@@ -36,6 +39,7 @@
         thonkpad = nixpkgs.lib.nixosSystem {
           inherit system;
 
+          specialArgs = { inherit inputs; };
           modules = [
             {
               nixpkgs.overlays = overlays;
@@ -50,6 +54,7 @@
         haumea = nixpkgs.lib.nixosSystem {
           inherit system;
 
+          specialArgs = { inherit inputs; };
           modules = [
             {
               nixpkgs.overlays = overlays;

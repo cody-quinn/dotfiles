@@ -94,14 +94,7 @@
 
   # Packages relegated to the entire system
   environment.systemPackages = with pkgs; [
-    unityhub
     cloudflare-warp
-  ];
-
-  fonts.fonts = with pkgs; [
-    jetbrains-mono
-    twemoji-color-font
-    font-awesome
   ];
 
   # Programs and configurating them

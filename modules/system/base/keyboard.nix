@@ -7,7 +7,4 @@
   boot.extraModprobeConfig = ''
     options hid_apple fnmode=2
   '';
-
-  # Rebinding my caps lock key to escape
-  services.xserver.xkbOptions = "caps:swapescape";
 }
