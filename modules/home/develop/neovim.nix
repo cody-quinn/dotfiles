@@ -1,6 +1,27 @@
 { config, pkgs, lib, ... }:
 
 let
+  fidget-nvim-legacy = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "fidget.nvim-legacy";
+    version = "2023-06-10";
+    src = pkgs.fetchFromGitHub {
+      owner = "j-hui";
+      repo = "fidget.nvim";
+      rev = "90c22e47be057562ee9566bad313ad42d622c1d3";
+      sha256 = "N3O/AvsD6Ckd62kDEN4z/K5A3SZNR15DnQeZhH6/Rr0=";
+    };
+    meta.homepage = "https://github.com/j-hui/fidget.nvim/";
+  };
+  sloth-syntax = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "sloth-syntax";
+    version = "2023-07-30";
+    src = pkgs.fetchFromGitHub {
+      owner = "slothlang";
+      repo = "vim";
+      rev = "9e331abb25dc17986bbd222fbbe28e76fc3034af";
+      sha256 = "kSwV+uMufwyhdHynxaShWHCWAj8Q15EJ+2VoIKFqoqw=";
+    };
+  };
 in
 {
   # Setting up neovim and making it the default editor
@@ -19,7 +40,7 @@ in
     indent-blankline-nvim
     which-key-nvim
     vim-sleuth
-    fidget-nvim
+    fidget-nvim-legacy
     comment-nvim
 
     # Color scheme
@@ -56,7 +77,8 @@ in
     # Language Support
     nvim-lspconfig
     rust-tools-nvim
-    Ionide-vim
+    sloth-syntax
+    emmet-vim
 
     # Autocompletion
     luasnip
@@ -70,6 +92,8 @@ in
     ripgrep
 
     # LSPs
+    clang-tools_15
+    jdt-language-server
     python310Packages.python-lsp-server
   ];
 
@@ -291,6 +315,18 @@ in
       end,
     })
 
+    -- Configure C/C++ support
+    lspconfig.clangd.setup {
+      on_attach = function(_, bufnr)
+        local nmap = function(keys, func, desc)
+          if desc then desc = 'LSP: ' .. desc end
+          vim.keymap.set('n', keys, func, { silent = true, buffer = bufnr, desc = desc })
+        end
+
+        nmap('<leader>Rr', '<CMD>FloatermNew --autoclose=0 make run<CR>'                   , 'Run Project')
+      end
+    }
+
     -- Configure Rust support
     require('rust-tools').setup {
       tools = {
@@ -305,10 +341,7 @@ in
         on_attach = function(_, bufnr)
           local rt = require('rust-tools')
           local nmap = function(keys, func, desc)
-            if desc then
-              desc = 'LSP: ' .. desc
-            end
-
+            if desc then desc = 'LSP: ' .. desc end
             vim.keymap.set('n', keys, func, { silent = true, buffer = bufnr, desc = desc })
           end
 
@@ -331,6 +364,9 @@ in
         },
       },
     }
+
+    -- Configure Java support
+    lspconfig.jdtls.setup {}
 
     -- Configure Python support
     lspconfig.pylsp.setup { 
