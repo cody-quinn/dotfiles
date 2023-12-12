@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  fidget-nvim-legacy = pkgs.vimUtils.buildVimPluginFrom2Nix {
+  fidget-nvim-legacy = pkgs.vimUtils.buildVimPlugin {
     pname = "fidget.nvim-legacy";
     version = "2023-06-10";
     src = pkgs.fetchFromGitHub {
@@ -12,7 +12,7 @@ let
     };
     meta.homepage = "https://github.com/j-hui/fidget.nvim/";
   };
-  sloth-syntax = pkgs.vimUtils.buildVimPluginFrom2Nix {
+  sloth-syntax = pkgs.vimUtils.buildVimPlugin {
     pname = "sloth-syntax";
     version = "2023-07-30";
     src = pkgs.fetchFromGitHub {
@@ -98,6 +98,8 @@ in
   ];
 
   programs.neovim.extraLuaConfig = ''
+    local get_hl_attr = require('cokeline.hlgroups').get_hl_attr
+
     -- Setting <space> as leader key
     vim.g.mapleader = ' '
     vim.g.maplocalleader = ' '
@@ -109,6 +111,10 @@ in
 
     vim.o.background = 'dark'
     vim.cmd.colorscheme 'gruvbox'
+
+    vim.api.nvim_set_hl(0, "SignColumn", {
+      bg = get_hl_attr("Normal", "bg")
+    })
 
     -- Setting web devicons
     require('nvim-web-devicons').setup {
@@ -178,9 +184,8 @@ in
     }
 
     -- Configure Indent Blankline
-    require('indent_blankline').setup {
-      char = '┊',
-      show_trailing_blankline_indent = false,
+    require('ibl').setup {
+      indent = { char = '┊' },
     }
 
     -- Configure Floaterm
@@ -235,27 +240,25 @@ in
     }
 
     vim.cmd([[
-      nnoremap <silent> <F2> <CMD>NeoTreeFloatToggle<CR>
-      tnoremap <silent> <F2> <C-\><C-n><CMD>NeoTreeFloatToggle<CR>
+      nnoremap <silent> <F2> <CMD>Neotree position=float toggle<CR>
+      tnoremap <silent> <F2> <C-\><C-n><CMD>Neotree position=float toggle<CR>
     ]])
 
     -- Configure Cokeline
-    local get_hex = require('cokeline/utils').get_hex
-
     require('cokeline').setup {
       default_hl = {
         fg = function(buffer)
           if buffer.is_focused then
-            return get_hex('ColorColumn', 'bg')
+            return get_hl_attr('ColorColumn', 'bg')
           else
-            return get_hex('Normal', 'fg')
+            return get_hl_attr('Normal', 'fg')
           end
         end,
         bg = function(buffer)
           if buffer.is_focused then
-            return get_hex('Normal', 'fg')
+            return get_hl_attr('Normal', 'fg')
           else
-            return get_hex('ColorColumn', 'bg')
+            return get_hl_attr('ColorColumn', 'bg')
           end
         end,
       },

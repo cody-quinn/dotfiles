@@ -21,8 +21,8 @@ in
       (mkIf cfg.kvm.enable quickemu)
     ];
 
-    virtualisation.libvirtd.enable = cfg.kvm.enable;
-    virtualisation.docker.enable = cfg.docker.enable;
+    virtualisation.libvirtd.enable = (mkIf cfg.kvm.enable true);
+    virtualisation.docker.enable = (mkIf cfg.docker.enable true);
 
     boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
   };

@@ -10,6 +10,7 @@
     cinnamon.nemo
     bitwarden
     qbittorrent
+    libreoffice
 
     # Launchers
     rofi

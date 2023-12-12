@@ -14,11 +14,12 @@
     gzip
     unzip
     zip
-    exa
+    eza
     neofetch
     gay
     yt-dlp
     graphviz
+    lm_sensors
   ];
 
   environment.shells = [ pkgs.zsh pkgs.bash ];

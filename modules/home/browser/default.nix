@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    qutebrowser-qt6
+    qutebrowser
   ];
 
   home.file.".config/qutebrowser/config.py".text = ''

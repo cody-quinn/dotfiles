@@ -7,10 +7,14 @@
     ../../modules/system/runtimes
     ../../modules/system/virtualisation
     ./hardware-configuration.nix
+    ./vm.nix
   ];
 
-  # Allow unfree packages
+  # Allow unfree packages & permit certain packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
 
   # Manage the user accounts using home manager
   home-manager.useGlobalPkgs = true;
@@ -18,8 +22,9 @@
   home-manager.extraSpecialArgs = { inherit inputs; };
   home-manager.users.cody = import ./users/cody/home.nix;
 
-  # Kernel Modules
+  # Kernel
   boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
+  boot.kernelParams = [ "video=HDMI-A-1:2560x1080@60" ];
 
   # Bootloader
   boot.loader.grub.enable = true;
@@ -28,6 +33,9 @@
   boot.loader.grub.useOSProber = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  # Virtualization
+  sys.vm.windows.enable = true;
 
   # Networking
   networking.hostName = "haumea"; # Define your hostname.
@@ -44,8 +52,8 @@
 
   # Disabling power management & sleep
   powerManagement.enable = false;
-  systemd.targets.sleep.enable = false;
-  systemd.targets.suspend.enable = false;
+  systemd.targets.sleep.enable = true;
+  systemd.targets.suspend.enable = true;
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
 
@@ -76,7 +84,7 @@
 
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar-hyprland;
+    package = pkgs.waybar;
   };
 
   services.dbus.enable = true;
@@ -102,10 +110,18 @@
   users.users.cody = {
     isNormalUser = true;
     description = "Cody";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" "libvirtd" "kvm" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" "libvirtd" "kvm" "i2c" ];
     packages = with pkgs; [ firefox ];
     shell = pkgs.zsh;
   };
+
+  # Enable RGB
+  services.hardware.openrgb.enable = true;
+  services.hardware.openrgb.motherboard = "amd";
+
+  # Setting up Plex
+  services.plex.enable = true;
+  services.plex.openFirewall = true;
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
@@ -115,7 +131,10 @@
     slurp
 
     cloudflare-warp
+    i2c-tools
   ];
+
+  services.flatpak.enable = true;
 
   # Programs and configurating them
   programs.java = {
@@ -132,7 +151,6 @@
   programs.noisetorch.enable = true;
 
   # Setting up docker
-  sys.virtualisation.kvm.enable = true;
   sys.virtualisation.docker.enable = true;
 
   # This value determines the NixOS release from which the default

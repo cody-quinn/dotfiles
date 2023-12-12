@@ -39,8 +39,8 @@
     };
 
     fonts = {
-      enableDefaultFonts = true;
-      fonts = with pkgs; [
+      enableDefaultPackages = true;
+      packages = with pkgs; [
         liberation_ttf
         dejavu_fonts
         noto-fonts
@@ -65,8 +65,8 @@
       };
     };
 
-    environment.variables = {
-      GTK_THEME = "Adwaita-dark";
-    };
+    # environment.variables = {
+    #   GTK_THEME = "Adwaita-dark";
+    # };
   };
 }

@@ -17,10 +17,10 @@
       name = "Adwaita";
     };
 
-    theme = {
-      package = pkgs.gnome.gnome-themes-extra;
-      name = "Adwaita-dark";
-    };
+    # theme = {
+    #   package = pkgs.gnome.gnome-themes-extra;
+    #   name = "Adwaita-dark";
+    # };
 
     gtk3 = {
       extraConfig = {
@@ -29,18 +29,18 @@
     };
 
     gtk4 = {
-      extraConfig = {
-        gtk-application-prefer-dark-theme = true;
-      };
+    #   extraConfig = {
+    #     gtk-application-prefer-dark-theme = true;
+    #   };
     };
   };
 
   qt = {
     enable = true;
-    platformTheme = "gnome";
-    style = {
-      package = pkgs.adwaita-qt;
-      name = "Adwaita-dark";
-    };
+    # platformTheme = "gnome";
+    # style = {
+    #   package = pkgs.adwaita-qt;
+    #   name = "Adwaita-dark";
+    # };
   };
 }

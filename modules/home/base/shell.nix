@@ -21,7 +21,7 @@ in
     programs.zsh = {
       enable = true;
       enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting.enable = true;
       dirHashes = {
         p = "$HOME/Projects";
         doc = "$HOME/Documents";
@@ -29,10 +29,10 @@ in
       };
       shellAliases = {
         o = "xdg-open";
-        l = "exa";
-        ls = "exa -l --icons --group-directories-first";
-        la = "exa -la --icons --group-directories-first";
-        lt = "exa -T -I \"node_modules|venv|Build\"";
+        l = "eza";
+        ls = "eza -l --icons --group-directories-first";
+        la = "eza -la --icons --group-directories-first";
+        lt = "eza -T -I \"node_modules|venv|Build\"";
         gs = "git status";
         ga = "git add .";
         gc = "git commit -S";
