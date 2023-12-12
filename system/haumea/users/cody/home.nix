@@ -49,6 +49,9 @@
     pinentryFlavor = "gnome3";
   };
 
+  home.file.".config/waybar/config".source = ./waybar/config;
+  home.file.".config/waybar/style.css".source = ./waybar/style.css;
+
   home.file.".config/hypr/hyprpaper.conf".text = ''
     preload = /home/cody/Pictures/wallpaper.jpg
     wallpaper = ,/home/cody/Pictures/wallpaper.jpg
