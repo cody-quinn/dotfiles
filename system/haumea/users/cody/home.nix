@@ -198,6 +198,7 @@
       bind = SUPER_CONTROL_SHIFT, Q     , exit
       bind = SUPER_SHIFT        , C     , killactive,
       bind = SUPER              , Space , togglefloating,
+      bind = SUPER_CONTROL      , F     , fullscreen,
 
       bind = SUPER      , H     , resizeactive, -50 0
       bind = SUPER      , L     , resizeactive, 50 0
