@@ -139,7 +139,7 @@
   # Programs and configurating them
   programs.java = {
     enable = true;
-    additionalRuntimes = { inherit (pkgs) jdk17 jdk11 jdk8; };
+    additionalRuntimes = { inherit (pkgs) jdk21 jdk17 jdk11 jdk8; };
     package = pkgs.jdk17;
   };
 
