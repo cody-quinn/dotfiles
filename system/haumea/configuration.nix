@@ -1,5 +1,17 @@
 { config, pkgs, lib, inputs, ... }:
 
+let
+  wireplumber_0_4 = pkgs.wireplumber.overrideAttrs (attrs: rec {
+    version = "0.4.17";
+    src = pkgs.fetchFromGitLab {
+      domain = "gitlab.freedesktop.org";
+      owner = "pipewire";
+      repo = "wireplumber";
+      rev = version;
+      hash = "sha256-vhpQT67+849WV1SFthQdUeFnYe/okudTQJoL3y+wXwI=";
+    };
+  });
+in
 {
   imports = [
     ../../modules/system/base
@@ -123,7 +135,9 @@
 
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar;
+    package = pkgs.waybar.overrideAttrs (prev: {
+      buildInputs = prev.buildInputs ++ [ wireplumber_0_4 ];
+    });
   };
 
   services.dbus.enable = true;
