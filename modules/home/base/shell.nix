@@ -20,7 +20,7 @@ in
   config = {
     programs.zsh = {
       enable = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       dirHashes = {
         p = "$HOME/Projects";
