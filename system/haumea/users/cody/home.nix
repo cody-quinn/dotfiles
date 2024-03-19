@@ -52,10 +52,7 @@
   };
 
   programs.gpg.enable = true;
-  services.gpg-agent = {
-    enable = true;
-    pinentryFlavor = "gnome3";
-  };
+  services.gpg-agent.enable = true;
 
   home.file.".config/waybar/config".source = ./waybar/config;
   home.file.".config/waybar/style.css".source = ./waybar/style.css;

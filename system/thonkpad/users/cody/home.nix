@@ -34,10 +34,7 @@
   };
 
   programs.gpg.enable = true;
-  services.gpg-agent = {
-    enable = true;
-    pinentryFlavor = "gnome3";
-  };
+  services.gpg-agent.enable = true;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
