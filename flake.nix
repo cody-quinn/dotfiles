@@ -9,17 +9,19 @@
 
     nixinate.url = "github:matthewcroughan/nixinate";
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland/v0.36.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     split-monitor-workspaces = {
       url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
     };
 
     prism-launcher.url = "github:PrismLauncher/PrismLauncher";
-    iamb.url = "github:ulyssa/iamb";
   };
 
-  outputs = { self, flake-utils, nixpkgs, home-manager, nixos-hardware, hyprland, prism-launcher, iamb, nixinate, split-monitor-workspaces, ... }@inputs:
+  outputs = { self, flake-utils, nixpkgs, home-manager, nixos-hardware, hyprland, prism-launcher, nixinate, split-monitor-workspaces, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -30,11 +32,6 @@
       };
 
       overlays = [
-        (_: p: { 
-          iamb = iamb.packages.${p.system}.default; 
-          split-monitor-workspaces = split-monitor-workspaces.packages.${p.system}.split-monitor-workspaces;
-        })
-
         hyprland.overlays.default
         prism-launcher.overlays.default
       ];

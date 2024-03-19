@@ -93,7 +93,6 @@ in
 
     # LSPs
     clang-tools_15
-    jdt-language-server
     python310Packages.python-lsp-server
   ];
 
@@ -376,8 +375,7 @@ in
       },
     }
 
-    -- Configure Java support
-    lspconfig.jdtls.setup {}
+    -- TODO: Configure Java support
 
     -- Configure Python support
     lspconfig.pylsp.setup { 

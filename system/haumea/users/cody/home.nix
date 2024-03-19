@@ -17,6 +17,7 @@
     # Communication
     (discord.override { nss = nss_latest; })
     element-desktop
+    slack
 
     # Misc
     krita
@@ -32,6 +33,13 @@
     gnumake
     cmake
     clang
+
+    eclipses.eclipse-java
+    jetbrains.idea-community-bin
+    jetbrains.idea-ultimate
+    jetbrains.rider
+
+    jd-gui
 
     # Calculator
     python310
@@ -59,19 +67,18 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = pkgs.hyprland;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     plugins = [
-      pkgs.split-monitor-workspaces
+      inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
     ];
 
     extraConfig = ''
       # See https://wiki.hyprland.org/Configuring/Monitors/
-      monitor=DP-1,2560x1080@60,0x0,1
-      monitor=HDMI-A-1,2560x1080@75,0x1080,1
+      monitor=HDMI-A-1,2560x1080@75,0x0,1
       monitor=,preferred,auto,1
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
-      exec-once = waybar & hyprpaper
+      exec-once = hyprpaper
 
       # Some default env vars.
       env = XCURSOR_SIZE,24
@@ -150,17 +157,21 @@
         workspace_swipe = off
       }
 
-      # Example per-device config
-      # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
-      device:epic-mouse-v1 {
-        sensitivity = -0.5
-      }
-
-      # Example windowrule v1
-      # windowrule = float, ^(kitty)$
-      # Example windowrule v2
-      # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+      # -- Fix odd behaviors in IntelliJ IDEs --
+      #! Fix focus issues when dialogs are opened or closed
+      windowrulev2 = windowdance,class:^(jetbrains-.*)$,floating:1
+      #! Fix splash screen showing in weird places and prevent annoying focus takeovers
+      windowrulev2 = center,class:^(jetbrains-.*)$,title:^(splash)$,floating:1
+      windowrulev2 = nofocus,class:^(jetbrains-.*)$,title:^(splash)$,floating:1
+      windowrulev2 = noborder,class:^(jetbrains-.*)$,title:^(splash)$,floating:1
+
+      #! Center popups/find windows
+      windowrulev2 = center,class:^(jetbrains-.*)$,title:^( )$,floating:1
+      windowrulev2 = stayfocused,class:^(jetbrains-.*)$,title:^( )$,floating:1
+      windowrulev2 = noborder,class:^(jetbrains-.*)$,title:^( )$,floating:1
+      #! Disable window flicker when autocomplete or tooltips appear
+      windowrulev2 = nofocus,class:^(jetbrains-.*)$,title:^(win.*)$,floating:1
 
       # Media controls for keyboards without dedicated keys
       binde = , XF86MonBrightnessUp  , exec, brightnessctl set +5%
@@ -238,6 +249,8 @@
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = SUPER, mouse:272, movewindow
       bindm = SUPER, mouse:273, resizewindow
+
+      exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
     '';
   };
 

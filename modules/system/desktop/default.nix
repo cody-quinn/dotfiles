@@ -9,8 +9,8 @@
   config = {
     services.xserver.enable = true;
     services.xserver.dpi = 96;
-    services.xserver.layout = "us";
-    services.xserver.xkbOptions = "caps:swapescape, compose:ralt";
+    services.xserver.xkb.layout = "us";
+    services.xserver.xkb.options = "caps:swapescape, compose:ralt";
     services.xserver.libinput = {
       enable = true;
       touchpad.tapping = false;

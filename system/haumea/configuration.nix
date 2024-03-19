@@ -42,6 +42,46 @@
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
   networking.networkmanager.enable = true;
 
+  # Wireguard VPN
+  networking.firewall = {
+    allowedTCPPorts = [ 3000 ];
+    allowedUDPPorts = [ 51820 ];
+  };
+
+  networking.wg-quick.interfaces = {
+    # wg0 = {
+    #   address = [ 
+    #     "172.30.0.2/32" 
+    #     "2a01:4ff:f0:c8c1:ac1e::2/128" 
+    #   ];
+    #
+    #   dns = [ 
+    #     "1.1.1.1" "1.0.0.1" 
+    #     "2606:4700:4700::1111" "2606:4700:4700::1001" 
+    #   ];
+    #
+    #   listenPort = 51820;
+    #   mtu = 1300;
+    #
+    #   privateKeyFile = "/etc/wireguard/wg0-key.priv";
+    #
+    #   peers = [
+    #     {
+    #       publicKey = "x/+Y8FskYpnm7pI/g61QS3VJWOeHXEbR+ogbNeKTdDE=";
+    #       presharedKeyFile = "/etc/wireguard/wg0-presharedkey.priv";
+    #
+    #       allowedIPs = [ 
+    #         "172.30.0.1" 
+    #         "0.0.0.0/0"
+    #       ];
+    #
+    #       endpoint = "wireguard.codyq.dev:51820";
+    #       persistentKeepalive = 15;
+    #     }
+    #   ];
+    # };
+  };
+
   # Bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
@@ -66,7 +106,7 @@
   # Enable printing support
   services.printing.enable = true;
   services.avahi.enable = true;
-  services.avahi.nssmdns = true;
+  services.avahi.nssmdns4 = true;
   services.avahi.openFirewall = true;
 
   # Enable hardware acceleration
@@ -74,11 +114,10 @@
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
 
-  # Enable the GNOME Desktop Environment.
-  # sys.desktop.awesome.enable = true;
+  # Enable hyprland
   programs.hyprland = {
     enable = true;
-    package = pkgs.hyprland;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
   };
 
@@ -90,8 +129,10 @@
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+    ];
   };
 
   # Enable sound with pipewire.
@@ -125,11 +166,13 @@
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
+    # For Hyprland
     hyprpaper
     wl-clipboard
     grim
     slurp
 
+    # Unrelated
     cloudflare-warp
     i2c-tools
   ];
@@ -140,7 +183,7 @@
   programs.java = {
     enable = true;
     additionalRuntimes = { inherit (pkgs) jdk21 jdk17 jdk11 jdk8; };
-    package = pkgs.jdk17;
+    package = pkgs.jdk21;
   };
 
   programs.zsh.enable = true;
@@ -149,6 +192,19 @@
   programs.adb.enable = true;
   programs.steam.enable = true;
   programs.noisetorch.enable = true;
+
+  # Setup nix ld
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    fuse3
+    icu
+    nss
+    openssl
+    curl
+    expat
+  ];
 
   # Setting up docker
   sys.virtualisation.docker.enable = true;
