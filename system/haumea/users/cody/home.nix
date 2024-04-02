@@ -53,6 +53,7 @@
 
   programs.gpg.enable = true;
   services.gpg-agent.enable = true;
+  services.gpg-agent.pinentryPackage = pkgs.pinentry-qt;
 
   home.file.".config/waybar/config".source = ./waybar/config;
   home.file.".config/waybar/style.css".source = ./waybar/style.css;
@@ -124,7 +125,7 @@
       }
 
       animations {
-        enabled = yes
+        enabled = no
 
         # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
 
