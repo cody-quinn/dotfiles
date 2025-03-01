@@ -8,15 +8,15 @@
 	],
 
 	"modules-center": [
+        "disk"
 	],
 
 	"modules-right": [
-		"pulseaudio",
-		"memory",
-		"cpu",
-		"disk",
-		"battery",
-        "clock",
+        "pulseaudio",
+        "memory",
+        "cpu",
+        "battery",
+        "clock"
 	],
 
 	"hyprland/workspaces": {
@@ -43,7 +43,7 @@
 
 	"pulseaudio": {
 		"format": "{icon} {volume:2}%",
-		"format-bluetooth": "{icon}  {volume}%",
+		"format-bluetooth": "{icon} {volume}%",
 		"format-muted": "MUTE",
 		"format-icons": {
 			"headphones": "",
@@ -81,12 +81,14 @@
 	},
 	"disk": {
 		"interval": 5,
-		"format": "Disk {percentage_used}%",
+		"tooltip-format": "Disk {percentage_used}%",
+        "format": "{specific_used} out of {specific_total} used ({percentage_used}%)",
+        "unit": "GB",
 		"path": "/"
 	},
 	"clock": {
         "interval": 1,
-		"format": "{:%H:%M:%S}",
+		"format": "{:%I:%M:%S %p}",
 		"tooltip": true
 	}
 }

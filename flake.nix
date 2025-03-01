@@ -4,24 +4,39 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    home-manager.url = "github:nix-community/home-manager";
-
-    nixinate.url = "github:matthewcroughan/nixinate";
-
-    hyprland = {
-      url = "github:hyprwm/Hyprland/v0.36.0";
+    home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces";
-      inputs.hyprland.follows = "hyprland";
-    };
 
-    prism-launcher.url = "github:PrismLauncher/PrismLauncher";
+    # hyprland = {
+    #   url = "github:hyprwm/Hyprland/v0.47.2?submodules=1";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    # split-monitor-workspaces = {
+    #   url = "github:Duckonaut/split-monitor-workspaces/1d4742b30aa9f3d01ea227a9c726985ffa832368";
+    # };
+
+    discordfetch = {
+      url = "github:cody-quinn/discordfetch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, flake-utils, nixpkgs, home-manager, nixos-hardware, hyprland, prism-launcher, nixinate, split-monitor-workspaces, ... }@inputs:
+  outputs =
+    {
+      self,
+      flake-utils,
+      nixpkgs,
+      nixpkgs-stable,
+      home-manager,
+      nixos-hardware,
+      discordfetch,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -32,13 +47,17 @@
       };
 
       overlays = [
-        hyprland.overlays.default
-        prism-launcher.overlays.default
+        (f: p: {
+          stable-rider =
+            (import nixpkgs-stable {
+              system = system;
+              config.allowUnfree = true;
+            }).jetbrains.rider;
+        })
       ];
     in
-    rec
-    {
-      apps = nixinate.nixinate.x86_64-linux self;
+    rec {
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
       nixosConfigurations = {
         # My laptop
         thonkpad = nixpkgs.lib.nixosSystem {

@@ -1,8 +1,13 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 with pkgs;
-let 
+let
   cfg = config.sys.virtualisation;
 in
 {
@@ -24,6 +29,9 @@ in
     virtualisation.libvirtd.enable = (mkIf cfg.kvm.enable true);
     virtualisation.docker.enable = (mkIf cfg.docker.enable true);
 
-    boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
+    boot.kernelModules = [
+      "kvm-amd"
+      "kvm-intel"
+    ];
   };
 }

@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   fidget-nvim-legacy = pkgs.vimUtils.buildVimPlugin {
@@ -88,12 +93,12 @@ in
   ];
 
   # Configuring neovim and installing packages required by our config
-  programs.neovim.extraPackages = with pkgs; [ 
+  programs.neovim.extraPackages = with pkgs; [
     ripgrep
 
     # LSPs
     clang-tools_15
-    python310Packages.python-lsp-server
+    # python310Packages.python-lsp-server
   ];
 
   programs.neovim.extraLuaConfig = ''

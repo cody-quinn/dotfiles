@@ -1,9 +1,14 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 let
   cfg = config.sys.desktop.awesome;
-in 
+in
 {
   options.sys.desktop.awesome = {
     enable = mkEnableOption "Enable AwesomeWM desktop support for this machine";

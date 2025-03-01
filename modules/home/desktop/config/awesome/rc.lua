@@ -253,8 +253,10 @@ end
 for i = 1, 9 do
     globalkeys = gears.table.join(globalkeys,
         awful.key({ modkey                     }, "#" .. i + 9, tag_view(i, function(tag) tag:view_only() end)),
-        awful.key({ modkey, "Control"          }, "#" .. i + 9, tag_view(i, function(tag) awful.tag.viewtoggle(tag) end)),
+        awful.key({ modkey, "Mod1"             }, "#" .. i + 9, tag_view(i, function(tag) awful.tag.viewtoggle(tag) end)),
         awful.key({ modkey, "Shift"            }, "#" .. i + 9, tag_move(i, function(tag) client.focus:move_to_tag(tag) end)),
+        awful.key({ modkey, "Shift", "Mod1"    }, "#" .. i + 9, tag_move(i, function(tag) client.focus:toggle_tag(tag) end)),
+
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9, function() client.focus:move_to_screen(i) end)
     )
 end

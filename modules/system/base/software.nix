@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   environment.systemPackages = with pkgs; [
@@ -22,6 +27,9 @@
     lm_sensors
   ];
 
-  environment.shells = [ pkgs.zsh pkgs.bash ];
+  environment.shells = [
+    pkgs.zsh
+    pkgs.bash
+  ];
   environment.pathsToLink = [ "/share/zsh" ];
 }

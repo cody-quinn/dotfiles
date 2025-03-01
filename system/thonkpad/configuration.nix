@@ -1,4 +1,10 @@
-{ config, pkgs, lib, home-manager, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  home-manager,
+  ...
+}:
 
 {
   imports = [
@@ -25,7 +31,10 @@
   # Networking
   networking.hostName = "thonkpad"; # Define your hostname.
   networking.networkmanager.enable = true;
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
 
   # Bluetooth
   hardware.bluetooth.enable = true;
@@ -40,9 +49,6 @@
   services.logind.lidSwitch = "ignore";
 
   hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true;
-
   hardware.nvidia = {
     prime.offload.enable = false;
     prime.sync.enable = true;
@@ -57,7 +63,6 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -82,7 +87,14 @@
   users.users.cody = {
     isNormalUser = true;
     description = "Cody";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" "libvirtd" "kvm" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "adbusers"
+      "docker"
+      "libvirtd"
+      "kvm"
+    ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
 
@@ -100,7 +112,14 @@
   # Programs and configurating them
   programs.java = {
     enable = true;
-    additionalRuntimes = { inherit (pkgs) jdk21 jdk17 jdk11 jdk8; };
+    additionalRuntimes = {
+      inherit (pkgs)
+        jdk21
+        jdk17
+        jdk11
+        jdk8
+        ;
+    };
     package = pkgs.jdk21;
   };
 
@@ -123,4 +142,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 }
-

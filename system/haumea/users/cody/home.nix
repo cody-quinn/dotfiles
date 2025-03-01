@@ -1,9 +1,13 @@
-{ lib, config, pkgs, inputs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
-    inputs.hyprland.homeManagerModules.default
-
     ../../../../modules/home/base
     ../../../../modules/home/browser
     ../../../../modules/home/desktop
@@ -16,14 +20,19 @@
   home.packages = with pkgs; [
     # Communication
     (discord.override { nss = nss_latest; })
+    (discord-canary.override { nss = nss_latest; })
     element-desktop
     slack
+    obsidian
 
     # Misc
     krita
     obs-studio
     libresprite
+    aseprite
     filebot
+
+    inputs.discordfetch.packages.${pkgs.system}.default
 
     # Gaming
     prismlauncher
@@ -34,12 +43,16 @@
     cmake
     clang
 
-    eclipses.eclipse-java
-    jetbrains.idea-community-bin
     jetbrains.idea-ultimate
     jetbrains.rider
+    # stable-rider
+    jetbrains.clion
+    zed-editor
 
-    jd-gui
+    godot_4
+    tiled
+    renderdoc
+    bytecode-viewer
 
     # Calculator
     python310
@@ -55,24 +68,136 @@
   services.gpg-agent.enable = true;
   services.gpg-agent.pinentryPackage = pkgs.pinentry-qt;
 
-  home.file.".config/waybar/config".source = ./waybar/config;
   home.file.".config/waybar/style.css".source = ./waybar/style.css;
+  home.file.".config/waybar/config".text = ''
+    {
+      "layer": "top",
+      "position": "top",
+
+      "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/window"
+      ],
+
+      "modules-center": [
+      ],
+
+      "modules-right": [
+        "battery",
+        "pulseaudio",
+        "clock"
+      ],
+
+      "hyprland/workspaces": {
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "format": "{icon}",
+        "format-icons": {
+          "11": "1",
+          "12": "2",
+          "13": "3",
+          "14": "4",
+          "15": "5",
+          "16": "6",
+          "17": "7",
+          "18": "8",
+          "19": "9",
+          "20": "10",
+        }
+      },
+      "hyprland/window": {
+        "separate-outputs": true,
+      },
+
+      "pulseaudio": {
+        "format": "{icon} {volume:2}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-muted": "MUTE",
+        "format-icons": {
+          "headphones": "",
+          "default": [
+            "",
+            ""
+          ]
+        },
+        "scroll-step": 5,
+        "on-click": "pamixer -t",
+        "on-click-right": "pavucontrol"
+      },
+      "memory": {
+        "interval": 5,
+        "format": "Mem {}%"
+      },
+      "cpu": {
+        "interval": 5,
+        "format": "CPU {usage}%"
+      },
+      "battery": {
+        "states": {
+          "good": 95,
+          "warning": 30,
+          "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-icons": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "disk": {
+        "interval": 5,
+        "tooltip-format": "Disk {percentage_used}%",
+        "format": "{specific_used} out of {specific_total} used ({percentage_used}%)",
+        "unit": "GB",
+        "path": "/"
+      },
+      "clock": {
+        "interval": 1,
+        "format": "{:%I:%M:%S %p}",
+        "tooltip": true
+      }
+    }
+  '';
 
   home.file.".config/hypr/hyprpaper.conf".text = ''
     preload = /home/cody/Pictures/wallpaper.jpg
     wallpaper = ,/home/cody/Pictures/wallpaper.jpg
   '';
 
+  home.file.".config/hypr/hyprlock.conf".text = ''
+    general {
+      hide_cursor = yes
+      no_fade_in = yes
+      no_fade_out = yes
+    }
+
+    background {
+      color = rgba(0, 0, 0, 1.0)
+    }
+
+    input-field {
+      position = 0, 0
+    }
+  '';
+
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    plugins = [
-      inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
-    ];
+    xwayland.enable = true;
+    # plugins = [
+    #   inputs.monitor-workspaces.packages.${pkgs.system}.monitor-workspaces
+    # ];
+
+    package = null;
+    portalPackage = null;
 
     extraConfig = ''
       # See https://wiki.hyprland.org/Configuring/Monitors/
-      monitor=HDMI-A-1,2560x1080@75,0x0,1
+      #monitor=DP-2,2560x1080@60,0x0,1
+      #monitor=HDMI-A-2,2560x1080@75,0x1080,1
       monitor=,preferred,auto,1
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -118,10 +243,12 @@
           new_optimizations = on
         }
 
-        drop_shadow = no
-        shadow_range = 4
-        shadow_render_power = 3
-        col.shadow = rgba(1a1a1aee)
+        shadow {
+          enabled = no
+          range = 4
+          render_power = 3
+          color = rgba(1a1a1aee)
+        }
       }
 
       animations {
@@ -146,9 +273,16 @@
       }
 
       master {
-        new_is_master = false
-        no_gaps_when_only = true
+        allow_small_split = true
+        new_status = slave
+        new_on_top = no
+        orientation = center
+        slave_count_for_center_master = 0
+        mfact = 0.65
       }
+
+      # bind = SUPER, [, removemaster
+      # bind = SUPER, ], addmaster
 
       gestures {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -158,7 +292,7 @@
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       # -- Fix odd behaviors in IntelliJ IDEs --
       #! Fix focus issues when dialogs are opened or closed
-      windowrulev2 = windowdance,class:^(jetbrains-.*)$,floating:1
+      #windowrulev2 = windowdance,class:^(jetbrains-.*)$,floating:1
       #! Fix splash screen showing in weird places and prevent annoying focus takeovers
       windowrulev2 = center,class:^(jetbrains-.*)$,title:^(splash)$,floating:1
       windowrulev2 = nofocus,class:^(jetbrains-.*)$,title:^(splash)$,floating:1
@@ -197,9 +331,8 @@
       bind = SUPER_SHIFT, H     , exec, alacritty -e htop
       bind = SUPER_SHIFT, P     , exec, alacritty -e python
       bind = SUPER_SHIFT, E     , exec, qutebrowser
-      bind = SUPER_SHIFT, S     , exec, flameshot gui
       bind = SUPER_SHIFT, D     , exec, discord
-      # TODO: Lock
+      bind = SUPER_SHIFT, L     , exec, hyprlock
       bind = SUPER_SHIFT, M     , exec, prismlauncher
       bind = SUPER_SHIFT, F     , exec, nemo
 
@@ -217,32 +350,33 @@
       bind = SUPER      , F     , layoutmsg, focusmaster
 
       # Utility binds
+      bind = SUPER        , S, exec, grim - | wl-copy
       bind = SUPER_SHIFT  , S, exec, grim -g "$(slurp)" - | wl-copy
       bind = SUPER_CONTROL, S, exec, grim -g "$(slurp -o)" - | wl-copy
 
       # Switch workspaces with mainMod + [0-9]
-      bind = SUPER, 1, split-workspace, 1
-      bind = SUPER, 2, split-workspace, 2
-      bind = SUPER, 3, split-workspace, 3
-      bind = SUPER, 4, split-workspace, 4
-      bind = SUPER, 5, split-workspace, 5
-      bind = SUPER, 6, split-workspace, 6
-      bind = SUPER, 7, split-workspace, 7
-      bind = SUPER, 8, split-workspace, 8
-      bind = SUPER, 9, split-workspace, 9
-      bind = SUPER, 0, split-workspace, 10
+      bind = SUPER, 1, workspace, 1
+      bind = SUPER, 2, workspace, 2
+      bind = SUPER, 3, workspace, 3
+      bind = SUPER, 4, workspace, 4
+      bind = SUPER, 5, workspace, 5
+      bind = SUPER, 6, workspace, 6
+      bind = SUPER, 7, workspace, 7
+      bind = SUPER, 8, workspace, 8
+      bind = SUPER, 9, workspace, 9
+      bind = SUPER, 0, workspace, 10
 
       # Move active window to a workspace with mainMod + SHIFT + [0-9]
-      bind = SUPER_SHIFT, 1, split-movetoworkspacesilent, 1
-      bind = SUPER_SHIFT, 2, split-movetoworkspacesilent, 2
-      bind = SUPER_SHIFT, 3, split-movetoworkspacesilent, 3
-      bind = SUPER_SHIFT, 4, split-movetoworkspacesilent, 4
-      bind = SUPER_SHIFT, 5, split-movetoworkspacesilent, 5
-      bind = SUPER_SHIFT, 6, split-movetoworkspacesilent, 6
-      bind = SUPER_SHIFT, 7, split-movetoworkspacesilent, 7
-      bind = SUPER_SHIFT, 8, split-movetoworkspacesilent, 8
-      bind = SUPER_SHIFT, 9, split-movetoworkspacesilent, 9
-      bind = SUPER_SHIFT, 0, split-movetoworkspacesilent, 10
+      bind = SUPER_SHIFT, 1, movetoworkspacesilent, 1
+      bind = SUPER_SHIFT, 2, movetoworkspacesilent, 2
+      bind = SUPER_SHIFT, 3, movetoworkspacesilent, 3
+      bind = SUPER_SHIFT, 4, movetoworkspacesilent, 4
+      bind = SUPER_SHIFT, 5, movetoworkspacesilent, 5
+      bind = SUPER_SHIFT, 6, movetoworkspacesilent, 6
+      bind = SUPER_SHIFT, 7, movetoworkspacesilent, 7
+      bind = SUPER_SHIFT, 8, movetoworkspacesilent, 8
+      bind = SUPER_SHIFT, 9, movetoworkspacesilent, 9
+      bind = SUPER_SHIFT, 0, movetoworkspacesilent, 10
 
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = SUPER, mouse:272, movewindow
@@ -259,7 +393,7 @@
   #
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
-  # changes in each release. 
+  # changes in each release.
   home.stateVersion = "22.11";
 
   # Let Home Manager install and manage itself.

@@ -31,5 +31,5 @@ size = 10
 [font.normal]
 family = "JetBrains Mono"
 
-[shell]
+[terminal.shell]
 program = "zsh"

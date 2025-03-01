@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -11,10 +16,12 @@
     services.xserver.dpi = 96;
     services.xserver.xkb.layout = "us";
     services.xserver.xkb.options = "caps:swapescape, compose:ralt";
-    services.xserver.libinput = {
+
+    services.libinput = {
       enable = true;
       touchpad.tapping = false;
       mouse.accelProfile = "flat";
+      mouse.accelSpeed = "1.4";
     };
 
     services.gvfs.enable = true;
@@ -50,17 +57,29 @@
         twitter-color-emoji
         font-awesome
 
-        (nerdfonts.override { 
-          fonts = [ "JetBrainsMono" ];
-        })
+        nerd-fonts.jetbrains-mono
       ];
 
       fontconfig = {
         defaultFonts = {
-          serif = [ "DejaVu Math TeX Gyre" "DejaVu Serif" "Noto Serif" ];
-          sansSerif = [ "DejaVu Sans" "Noto Sans" ];
-          monospace = [ "JetBrainsMono Nerd Font" "DejaVu Sans Mono" ];
-          emoji = [ "Twitter Color Emoji" "Noto Color Emoji" "Noto Emoji" ];
+          serif = [
+            "DejaVu Math TeX Gyre"
+            "DejaVu Serif"
+            "Noto Serif"
+          ];
+          sansSerif = [
+            "DejaVu Sans"
+            "Noto Sans"
+          ];
+          monospace = [
+            "JetBrainsMono Nerd Font"
+            "DejaVu Sans Mono"
+          ];
+          emoji = [
+            "Twitter Color Emoji"
+            "Noto Color Emoji"
+            "Noto Emoji"
+          ];
         };
       };
     };

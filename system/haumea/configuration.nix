@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 
 let
   wireplumber_0_4 = pkgs.wireplumber.overrideAttrs (attrs: rec {
@@ -35,7 +41,10 @@ in
   home-manager.users.cody = import ./users/cody/home.nix;
 
   # Kernel
-  boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
+  boot.kernelModules = [
+    "i2c-dev"
+    "i2c-piix4"
+  ];
   boot.kernelParams = [ "video=HDMI-A-1:2560x1080@60" ];
 
   # Bootloader
@@ -46,30 +55,77 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  # Configuring secondary drives
+  fileSystems."/mnt/drive-a" = {
+    device = "/dev/disk/by-uuid/aa675732-bebd-4d03-8cfc-680dc9cbd3f9";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "nofail"
+      "x-gvfs-show"
+      "x-gvfs-name=Drive%20A"
+    ];
+  };
+
+  fileSystems."/mnt/drive-b" = {
+    device = "/dev/disk/by-uuid/b868a06a-679d-4c39-bdca-a840ad54caa0";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "nofail"
+      "x-gvfs-show"
+      "x-gvfs-name=Drive%20B"
+    ];
+  };
+
   # Virtualization
-  sys.vm.windows.enable = true;
+  sys.vm.windows.enable = false;
 
   # Networking
   networking.hostName = "haumea"; # Define your hostname.
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
   networking.networkmanager.enable = true;
+
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
+
+  services.resolved = {
+    enable = true;
+    dnssec = "true";
+    domains = [ "~." ];
+    fallbackDns = [
+      "1.1.1.1#one.one.one.one"
+      "1.0.0.1#one.one.one.one"
+    ];
+    dnsovertls = "true";
+  };
+
+  services.mullvad-vpn.enable = true;
+
+  # networking.networkmanager.dns = "none";
+  # networking.resolvconf.enable = pkgs.lib.mkForce false;
+  # networking.dhcpcd.extraConfig = "nohook resolv.conf";
 
   # Wireguard VPN
   networking.firewall = {
-    allowedTCPPorts = [ 3000 ];
-    allowedUDPPorts = [ 51820 ];
+    allowedUDPPorts = [
+      34197 # 51820 30502
+    ];
+    # allowedTCPPorts = [ 30502 ];
+    allowedTCPPorts = [ 5173 ];
   };
 
   networking.wg-quick.interfaces = {
     # wg0 = {
-    #   address = [ 
-    #     "172.30.0.2/32" 
-    #     "2a01:4ff:f0:c8c1:ac1e::2/128" 
+    #   address = [
+    #     "172.30.0.2/32"
+    #     "2a01:4ff:f0:c8c1:ac1e::2/128"
     #   ];
     #
-    #   dns = [ 
-    #     "1.1.1.1" "1.0.0.1" 
-    #     "2606:4700:4700::1111" "2606:4700:4700::1001" 
+    #   dns = [
+    #     "1.1.1.1" "1.0.0.1"
+    #     "2606:4700:4700::1111" "2606:4700:4700::1001"
     #   ];
     #
     #   listenPort = 51820;
@@ -79,15 +135,14 @@ in
     #
     #   peers = [
     #     {
-    #       publicKey = "x/+Y8FskYpnm7pI/g61QS3VJWOeHXEbR+ogbNeKTdDE=";
+    #       publicKey = "JmVsavRATCvUECBdZuTUyZAIA+k/3xfCQPCGgnoD+lU=";
     #       presharedKeyFile = "/etc/wireguard/wg0-presharedkey.priv";
     #
-    #       allowedIPs = [ 
-    #         "172.30.0.1" 
+    #       allowedIPs = [
     #         "0.0.0.0/0"
     #       ];
     #
-    #       endpoint = "wireguard.codyq.dev:51820";
+    #       endpoint = "5.161.241.87:51820";
     #       persistentKeepalive = 15;
     #     }
     #   ];
@@ -111,7 +166,7 @@ in
 
   # Configure the X11 windowing system.
   services.xserver.displayManager.startx.enable = true;
-  
+
   # Setup drawing tablet
   hardware.opentabletdriver.enable = true;
 
@@ -123,15 +178,14 @@ in
 
   # Enable hardware acceleration
   hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true;
 
   # Enable hyprland
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
   };
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   programs.waybar = {
     enable = true;
@@ -145,12 +199,15 @@ in
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-hyprland
-      xdg-desktop-portal-gtk
     ];
   };
 
+  security.polkit.enable = true;
+
+  # Enabling AwesomeWM
+  # sys.desktop.awesome.enable = false;
+
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -165,7 +222,15 @@ in
   users.users.cody = {
     isNormalUser = true;
     description = "Cody";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" "libvirtd" "kvm" "i2c" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "adbusers"
+      "docker"
+      "libvirtd"
+      "kvm"
+      "i2c"
+    ];
     packages = with pkgs; [ firefox ];
     shell = pkgs.zsh;
   };
@@ -182,6 +247,7 @@ in
   environment.systemPackages = with pkgs; [
     # For Hyprland
     hyprpaper
+    hyprlock
     wl-clipboard
     grim
     slurp
@@ -196,7 +262,16 @@ in
   # Programs and configurating them
   programs.java = {
     enable = true;
-    additionalRuntimes = { inherit (pkgs) jdk21 jdk17 jdk11 jdk8; };
+    additionalRuntimes = {
+      inherit (pkgs)
+        jdk23
+        jdk21
+        jdk17
+        jdk11
+        jdk8
+        temurin-jre-bin-8
+        ;
+    };
     package = pkgs.jdk21;
   };
 
@@ -204,21 +279,29 @@ in
   programs.dconf.enable = true;
   programs.slock.enable = true;
   programs.adb.enable = true;
-  programs.steam.enable = true;
   programs.noisetorch.enable = true;
 
-  # Setup nix ld
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc
-    zlib
-    fuse3
-    icu
-    nss
-    openssl
-    curl
-    expat
-  ];
+  programs.gamescope.enable = true;
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
+
+  # Setup discordfetch
+  systemd.user.services.discordfetch = {
+    enable = true;
+    description = "discordfetch";
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = ''
+        ${inputs.discordfetch.packages.${pkgs.system}.default}/bin/discordfetch \
+          --button "GitHub" "https://github.com/cody-quinn" \
+          --button "I use NixOS btw" "https://nixos.org"
+      '';
+    };
+    after = [ "network.target" ];
+    wantedBy = [ "default.target" ];
+  };
 
   # Setting up docker
   sys.virtualisation.docker.enable = true;

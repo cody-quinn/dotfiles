@@ -1,5 +1,10 @@
 # Forked from https://github.com/gytis-ivaskevicius/nixfiles/blob/master/config/dev.nix (MIT)
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 let
@@ -34,9 +39,13 @@ in
       escapeDashes = it: replaceStrings [ "-" ] [ "_" ] it;
 
       javaPkgs = javaCfg.additionalRuntimes;
-      javaAliases = mapAttrs' (name: value: nameValuePair "java-${name}" "${value.home}/bin/java") javaPkgs;
+      javaAliases = mapAttrs' (
+        name: value: nameValuePair "java-${name}" "${value.home}/bin/java"
+      ) javaPkgs;
       javaTmpfiles = mapAttrsFlatten (name: value: "L+ /nix/java${name} - - - - ${value.home}") javaPkgs;
-      javaEnvVariables = mapAttrs' (name: value: nameValuePair "JAVA_HOME_${toUpper (escapeDashes name)}" "${value.home}") javaPkgs;
+      javaEnvVariables = mapAttrs' (
+        name: value: nameValuePair "JAVA_HOME_${toUpper (escapeDashes name)}" "${value.home}"
+      ) javaPkgs;
     in
     {
       environment.variables = javaEnvVariables // defaultEnvVariables;

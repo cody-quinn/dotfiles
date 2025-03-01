@@ -1,10 +1,15 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   home.pointerCursor = {
     x11.enable = true;
     gtk.enable = true;
-    
+
     package = pkgs.vanilla-dmz;
     name = "Vanilla-DMZ";
     size = 24;
@@ -13,7 +18,7 @@
   gtk = {
     enable = true;
     iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
     };
 
@@ -29,9 +34,9 @@
     };
 
     gtk4 = {
-    #   extraConfig = {
-    #     gtk-application-prefer-dark-theme = true;
-    #   };
+      #   extraConfig = {
+      #     gtk-application-prefer-dark-theme = true;
+      #   };
     };
   };
 
