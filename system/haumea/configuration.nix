@@ -6,18 +6,6 @@
   ...
 }:
 
-let
-  wireplumber_0_4 = pkgs.wireplumber.overrideAttrs (attrs: rec {
-    version = "0.4.17";
-    src = pkgs.fetchFromGitLab {
-      domain = "gitlab.freedesktop.org";
-      owner = "pipewire";
-      repo = "wireplumber";
-      rev = version;
-      hash = "sha256-vhpQT67+849WV1SFthQdUeFnYe/okudTQJoL3y+wXwI=";
-    };
-  });
-in
 {
   imports = [
     ../../modules/system/base
@@ -30,9 +18,7 @@ in
 
   # Allow unfree packages & permit certain packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
+  nixpkgs.config.permittedInsecurePackages = [ ];
 
   # Manage the user accounts using home manager
   home-manager.useGlobalPkgs = true;
@@ -179,29 +165,7 @@ in
   # Enable hardware acceleration
   hardware.opengl.enable = true;
 
-  # Enable hyprland
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  programs.waybar = {
-    enable = true;
-    package = pkgs.waybar.overrideAttrs (prev: {
-      buildInputs = prev.buildInputs ++ [ wireplumber_0_4 ];
-    });
-  };
-
   services.dbus.enable = true;
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-    ];
-  };
-
   security.polkit.enable = true;
 
   # Enabling AwesomeWM
@@ -245,13 +209,6 @@ in
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    # For Hyprland
-    hyprpaper
-    hyprlock
-    wl-clipboard
-    grim
-    slurp
-
     # Unrelated
     cloudflare-warp
     i2c-tools

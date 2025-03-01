@@ -1,0 +1,101 @@
+@define-color gray   #928374;
+@define-color red    #fb4934;
+@define-color green  #b8bb26;
+@define-color yellow #fabd2f;
+@define-color blue   #83a598;
+@define-color purple #d3869b;
+@define-color aqua   #8ec07c;
+@define-color orange #fe8019;
+
+@define-color bg-red    #cc241d;
+@define-color bg-green  #98971a;
+@define-color bg-yellow #d79921;
+@define-color bg-blue   #458588;
+@define-color bg-purple #b16286;
+@define-color bg-aqua   #689d6a;
+
+@define-color bg0 #1d2021;
+@define-color bg1 #282828;
+@define-color bg2 #3c3836;
+@define-color bg3 #504945;
+@define-color bg4 #665c54;
+@define-color bg5 #7c6f64;
+
+@define-color fg0 #fbf1c7;
+@define-color fg1 #ebdbb2;
+@define-color fg2 #d5c4a1;
+@define-color fg3 #bdae93;
+@define-color fg4 #a89984;
+
+* {
+  font-size: 13.5px;
+  font-family: monospace;
+}
+
+window#waybar {
+  background: @bg0;
+  color: @fg1;
+}
+
+#custom-padding {
+  background: @bg0;
+  min-width: 1200px;
+}
+
+#workspaces {
+  background: @bg0;
+}
+
+#workspaces button {
+  background: @bg1;
+  color: @fg1;
+  border-radius: 0;
+  padding: 0;
+}
+
+#workspaces button.empty {
+  background: @bg0;
+}
+
+#workspaces button.active {
+  background: @bg-blue;
+}
+
+#workspaces button.urgent {
+  background: @bg-red;
+}
+
+#window {
+  /* background: @bg1; */
+  padding: 0 8px;
+}
+
+#pulseaudio,
+#memory,
+#cpu,
+#disk,
+#battery,
+#tray,
+#clock {
+  background: @bg0;
+  padding: 0 8px;
+}
+
+#pulseaudio {
+  color: @red;
+}
+#memory {
+  color: @green;
+}
+#cpu {
+  color: @yellow;
+}
+#disk {
+  color: @blue;
+}
+#battery {
+  color: @purple;
+}
+#clock {
+  color: @fg1;
+}

@@ -2,7 +2,6 @@
   description = "Cody's System Flakes";
 
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -11,14 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # hyprland = {
-    #   url = "github:hyprwm/Hyprland/v0.47.2?submodules=1";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    # split-monitor-workspaces = {
-    #   url = "github:Duckonaut/split-monitor-workspaces/1d4742b30aa9f3d01ea227a9c726985ffa832368";
-    # };
+    treefmt-nix.url = "github:numtide/treefmt-nix";
 
     discordfetch = {
       url = "github:cody-quinn/discordfetch";
@@ -29,15 +21,15 @@
   outputs =
     {
       self,
-      flake-utils,
       nixpkgs,
       nixpkgs-stable,
-      home-manager,
       nixos-hardware,
-      discordfetch,
+      home-manager,
+      treefmt-nix,
       ...
     }@inputs:
     let
+      username = "cody";
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
@@ -46,18 +38,19 @@
         };
       };
 
-      overlays = [
-        (f: p: {
-          stable-rider =
-            (import nixpkgs-stable {
-              system = system;
-              config.allowUnfree = true;
-            }).jetbrains.rider;
-        })
-      ];
+      formatter = treefmt-nix.lib.evalModule pkgs {
+        projectRootFile = "flake.nix";
+        programs.nixfmt.enable = true;
+      };
+
+      overlays = [ ];
     in
-    rec {
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
+    {
+      formatter.${system} = formatter.config.build.wrapper;
+      checks.${system} = {
+        formatting = formatter.config.build.check self;
+      };
+
       nixosConfigurations = {
         # My laptop
         thonkpad = nixpkgs.lib.nixosSystem {
@@ -74,11 +67,12 @@
             (import ./system/thonkpad/configuration.nix)
           ];
         };
+
         # My desktop PC
         haumea = nixpkgs.lib.nixosSystem {
           inherit system;
 
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs username; };
           modules = [
             {
               nixpkgs.overlays = overlays;
@@ -86,13 +80,9 @@
 
             home-manager.nixosModules.home-manager
             (import ./system/haumea/configuration.nix)
+            (import ./hyprland)
           ];
         };
-      };
-      devShell.x86_64-linux = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          rnix-lsp
-        ];
       };
     };
 }
