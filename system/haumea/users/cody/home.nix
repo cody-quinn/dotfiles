@@ -53,6 +53,12 @@
     renderdoc
     bytecode-viewer
 
+    minikube
+    docker-machine-kvm2
+    kubectl
+    kubernetes-helm
+    lens
+
     # Calculator
     python310
   ];

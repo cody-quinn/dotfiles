@@ -13,6 +13,7 @@
     alacritty
     neovide
     nemo
+    peazip
     bitwarden
     qbittorrent
     libreoffice

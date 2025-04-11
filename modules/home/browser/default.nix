@@ -2,7 +2,9 @@
 
 {
   home.packages = with pkgs; [
-    qutebrowser
+    (qutebrowser.override {
+      enableWideVine = true;
+    })
   ];
 
   home.file.".config/qutebrowser/config.py".text = ''

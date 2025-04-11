@@ -212,7 +212,16 @@
     # Unrelated
     cloudflare-warp
     i2c-tools
+
+    # Mounting iOS devices
+    libimobiledevice
+    ifuse
   ];
+
+  services.usbmuxd = {
+    enable = true;
+    package = pkgs.usbmuxd2;
+  };
 
   services.flatpak.enable = true;
 
@@ -261,6 +270,7 @@
   };
 
   # Setting up docker
+  sys.virtualisation.kvm.enable = true;
   sys.virtualisation.docker.enable = true;
 
   # This value determines the NixOS release from which the default

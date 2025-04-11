@@ -1,11 +1,17 @@
+{
+  modulesLeft ? [ ],
+  modulesCenter ? [ ],
+  modulesRight ? [ ],
+}:
+
 ''
   {
     "layer": "top",
     "position": "top",
 
-    "modules-left": ["custom/padding", "hyprland/workspaces", "hyprland/window"],
-    "modules-center": [],
-    "modules-right": ["battery", "pulseaudio", "clock", "custom/padding"],
+    "modules-left": ${builtins.toJSON modulesLeft},
+    "modules-center": ${builtins.toJSON modulesCenter},
+    "modules-right": ${builtins.toJSON modulesRight},
 
     "custom/padding": {
       "format": " "

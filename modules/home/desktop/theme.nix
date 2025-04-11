@@ -34,9 +34,9 @@
     };
 
     gtk4 = {
-      #   extraConfig = {
-      #     gtk-application-prefer-dark-theme = true;
-      #   };
+      extraConfig = {
+        gtk-application-prefer-dark-theme = true;
+      };
     };
   };
 

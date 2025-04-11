@@ -43,6 +43,9 @@ in
         gc = "git commit -S";
         gp = "git push";
         bat = "cat /sys/class/power_supply/BAT*/energy_now";
+        k = "kubectl";
+        kg = "kubectl get";
+        mk = "minikube";
       };
       history = {
         size = 1000;
