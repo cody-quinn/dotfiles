@@ -19,6 +19,7 @@
         ];
 
         modulesRight = [
+          "custom/minehub"
           "battery"
           "pulseaudio"
           "clock"

@@ -35,6 +35,10 @@
 
     c.qt.chromium.low_end_device_mode = "never"
 
+    c.url.searchengines = {"DEFAULT": "https://kagi.com/search?q={}"}
+    c.url.default_page = "https://kagi.com"
+    c.url.start_pages = "https://kagi.com"
+
     config.load_autoconfig(True)
   '';
 

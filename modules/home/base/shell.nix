@@ -46,6 +46,8 @@ in
         k = "kubectl";
         kg = "kubectl get";
         mk = "minikube";
+        d = "docker";
+        dc = "docker compose";
       };
       history = {
         size = 1000;

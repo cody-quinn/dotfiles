@@ -17,6 +17,11 @@
       "format": " "
     },
 
+    "custom/minehub": {
+      "exec": "mcstatus play.minehub.live status | grep players | awk '{ print \"Players: \" $2 }'",
+      "interval": 30
+    },
+
     "hyprland/workspaces": {
       "on-click": "activate",
       "on-scroll-up": "hyprctl dispatch workspace e+1",

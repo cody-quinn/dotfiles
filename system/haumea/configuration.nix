@@ -95,44 +95,38 @@
 
   # Wireguard VPN
   networking.firewall = {
-    allowedUDPPorts = [
-      34197 # 51820 30502
-    ];
-    # allowedTCPPorts = [ 30502 ];
-    allowedTCPPorts = [ 5173 ];
+    allowedUDPPorts = [ ];
+    allowedTCPPorts = [ 5173 25565 ];
   };
 
   networking.wg-quick.interfaces = {
-    # wg0 = {
-    #   address = [
-    #     "172.30.0.2/32"
-    #     "2a01:4ff:f0:c8c1:ac1e::2/128"
-    #   ];
-    #
-    #   dns = [
-    #     "1.1.1.1" "1.0.0.1"
-    #     "2606:4700:4700::1111" "2606:4700:4700::1001"
-    #   ];
-    #
-    #   listenPort = 51820;
-    #   mtu = 1300;
-    #
-    #   privateKeyFile = "/etc/wireguard/wg0-key.priv";
-    #
-    #   peers = [
-    #     {
-    #       publicKey = "JmVsavRATCvUECBdZuTUyZAIA+k/3xfCQPCGgnoD+lU=";
-    #       presharedKeyFile = "/etc/wireguard/wg0-presharedkey.priv";
-    #
-    #       allowedIPs = [
-    #         "0.0.0.0/0"
-    #       ];
-    #
-    #       endpoint = "5.161.241.87:51820";
-    #       persistentKeepalive = 15;
-    #     }
-    #   ];
-    # };
+    wg0 = {
+      address = ["192.168.239.6/32"];
+
+      dns = [
+        "1.1.1.1" "1.0.0.1"
+        "2606:4700:4700::1111" "2606:4700:4700::1001"
+      ];
+
+      listenPort = 51820;
+      mtu = 1300;
+
+      privateKeyFile = "/etc/wireguard/wg0-key.priv";
+
+      peers = [
+        {
+          publicKey = "RFPYvkr+luT91K+9u+cMKd/gQ/jNv6bQJmARuTrtHQ8=";
+
+          allowedIPs = [
+            "192.168.240.0/20"
+            "192.168.239.0/24"
+          ];
+
+          endpoint = "5.161.73.194:51820";
+          persistentKeepalive = 21;
+        }
+      ];
+    };
   };
 
   # Bluetooth
@@ -155,6 +149,9 @@
 
   # Setup drawing tablet
   hardware.opentabletdriver.enable = true;
+
+  # Setup keyboard
+  hardware.keyboard.zsa.enable = true;
 
   # Enable printing support
   services.printing.enable = true;

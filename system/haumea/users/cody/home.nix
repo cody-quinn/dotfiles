@@ -31,6 +31,9 @@
     libresprite
     aseprite
     filebot
+    ffmpeg
+    keymapp
+    mcstatus
 
     inputs.discordfetch.packages.${pkgs.system}.default
 
@@ -45,6 +48,7 @@
 
     jetbrains.idea-ultimate
     jetbrains.rider
+    jetbrains.goland
     jetbrains.clion
     zed-editor
 
@@ -52,6 +56,8 @@
     tiled
     renderdoc
     bytecode-viewer
+
+    dive
 
     minikube
     docker-machine-kvm2
