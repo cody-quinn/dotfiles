@@ -1,14 +1,10 @@
 ''
   # See https://wiki.hyprland.org/Configuring/Monitors/
-  #monitor=DP-2,2560x1080@60,0x0,1
-  #monitor=HDMI-A-2,2560x1080@75,0x1080,1
+  monitor=DP-4,7680x2160@120.00Hz,0x0,1.5
   monitor=,preferred,auto,1
 
   # See https://wiki.hyprland.org/Configuring/Keywords/ for more
   exec-once = hyprpaper
-
-  # Some default env vars.
-  env = XCURSOR_SIZE,24
 
   # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
   input {
@@ -24,8 +20,6 @@
   }
 
   general {
-    # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
     gaps_in = 0
     gaps_out = 0
     border_size = 0
@@ -34,6 +28,13 @@
 
     layout = master
   }
+
+  xwayland {
+    force_zero_scaling = true
+  }
+
+  env = GDK_SCALE,1.5
+  env = XCURSOR_SIZE,24
 
   decoration {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -134,7 +135,7 @@
   bind = SUPER_SHIFT, Return, exec, alacritty
   bind = SUPER_SHIFT, H     , exec, alacritty -e htop
   bind = SUPER_SHIFT, P     , exec, alacritty -e python
-  bind = SUPER_SHIFT, E     , exec, qutebrowser
+  bind = SUPER_SHIFT, E     , exec, flatpak run app.zen_browser.zen
   bind = SUPER_SHIFT, D     , exec, discord
   bind = SUPER_SHIFT, L     , exec, hyprlock
   bind = SUPER_SHIFT, M     , exec, prismlauncher

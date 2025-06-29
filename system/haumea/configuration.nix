@@ -134,7 +134,7 @@
   services.blueman.enable = true;
 
   # Timezone and internationalisation
-  time.timeZone = "America/Chicago";
+  time.timeZone = "America/Phoenix";
   i18n.defaultLocale = "en_US.utf8";
 
   # Disabling power management & sleep
@@ -210,6 +210,8 @@
     cloudflare-warp
     i2c-tools
 
+    git-filter-repo
+
     # Mounting iOS devices
     libimobiledevice
     ifuse
@@ -221,6 +223,10 @@
   };
 
   services.flatpak.enable = true;
+
+  environment.variables = {
+    GOPATH = "$XDG_CACHE_HOME/go";
+  };
 
   # Programs and configurating them
   programs.java = {
@@ -258,7 +264,7 @@
       Type = "simple";
       ExecStart = ''
         ${inputs.discordfetch.packages.${pkgs.system}.default}/bin/discordfetch \
-          --button "GitHub" "https://github.com/cody-quinn" \
+          --button "Website" "https://codyq.dev" \
           --button "I use NixOS btw" "https://nixos.org"
       '';
     };

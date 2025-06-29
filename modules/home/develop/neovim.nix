@@ -98,7 +98,7 @@ in
 
     # LSPs
     clang-tools_15
-    # python310Packages.python-lsp-server
+    zls
   ];
 
   programs.neovim.extraLuaConfig = ''
@@ -389,6 +389,10 @@ in
         -- Python specifically isn't setting omnifunc correctly, ftplugin conflict
         vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
       end
+    }
+
+    -- Configure Zig support
+    lspconfig.zls.setup {
     }
 
     -- Configure Auto Complete
