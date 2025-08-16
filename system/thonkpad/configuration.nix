@@ -2,7 +2,7 @@
   config,
   pkgs,
   lib,
-  home-manager,
+  inputs,
   ...
 }:
 
@@ -21,6 +21,7 @@
   # Manage the user accounts using home manager
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { inherit inputs; };
   home-manager.users.cody = import ./users/cody/home.nix;
 
   # Bootloader.
@@ -36,12 +37,19 @@
     "1.0.0.1"
   ];
 
+  networking.firewall = {
+    allowedUDPPorts = [ ];
+    allowedTCPPorts = [ 8000 ];
+  };
+
+  services.mullvad-vpn.enable = true;
+
   # Bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
   # Timezone and internationalisation
-  time.timeZone = "America/Chicago";
+  time.timeZone = "America/Phoenix";
   i18n.defaultLocale = "en_US.utf8";
 
   # Configuring my display drivers & options
@@ -114,6 +122,7 @@
     enable = true;
     additionalRuntimes = {
       inherit (pkgs)
+        jdk23
         jdk21
         jdk17
         jdk11
@@ -127,7 +136,6 @@
   programs.dconf.enable = true;
   programs.slock.enable = true;
   programs.adb.enable = true;
-  programs.steam.enable = true;
   programs.noisetorch.enable = true;
 
   # Setting up docker
