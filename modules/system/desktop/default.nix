@@ -29,13 +29,15 @@
     xdg.mime.defaultApplications = {
       "inode/directory" = "nemo.desktop";
 
-      "text/html" = "org.qutebrowser.qutebrowser.desktop";
-      "image/svg" = "org.qutebrowser.qutebrowser.desktop";
-      "image/svg+xml" = "org.qutebrowser.qutebrowser.desktop";
-      "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
-      "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
-      "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
-      "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
+      "text/html" = "app.zen_browser.zen.desktop";
+      "image/svg" = "app.zen_browser.zen.desktop";
+      "image/svg+xml" = "app.zen_browser.zen.desktop";
+      "x-scheme-handler/http" = "app.zen_browser.zen.desktop";
+      "x-scheme-handler/https" = "app.zen_browser.zen.desktop";
+      "x-scheme-handler/about" = "app.zen_browser.zen.desktop";
+      "x-scheme-handler/mailto" = "app.zen_browser.zen.desktop";
+      "x-scheme-handler/unknown" = "app.zen_browser.zen.desktop";
+
       "application/pdf" = "org.pwmt.zathura.desktop";
 
       "image/png" = "feh.desktop";

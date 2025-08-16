@@ -1,6 +1,6 @@
 ''
   # See https://wiki.hyprland.org/Configuring/Monitors/
-  monitor=DP-4,7680x2160@120.00Hz,0x0,1.5
+  monitor=DP-3,7680x2160@120.00Hz,0x0,1.5
   monitor=,preferred,auto,1
 
   # See https://wiki.hyprland.org/Configuring/Keywords/ for more
