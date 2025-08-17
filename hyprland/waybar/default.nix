@@ -1,5 +1,13 @@
-{ pkgs, username, ... }:
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
 
+let
+  cfg = config.desktop.hyprland;
+in
 {
   programs.waybar = {
     enable = true;
@@ -12,18 +20,8 @@
     home.file.".config/waybar/style.css".source = ./style.css;
     home.file.".config/waybar/config".text = (
       import ./config.nix {
-        modulesLeft = [
-          "custom/padding"
-          "hyprland/workspaces"
-          "hyprland/window"
-        ];
-
-        modulesRight = [
-          "battery"
-          "pulseaudio"
-          "clock"
-          "custom/padding"
-        ];
+        modulesLeft = cfg.modulesLeft;
+        modulesRight = cfg.modulesRight;
       }
     );
   };

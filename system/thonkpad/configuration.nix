@@ -60,12 +60,9 @@
   hardware.nvidia = {
     prime.offload.enable = false;
     prime.sync.enable = true;
-    modesetting.enable = false;
+    modesetting.enable = true;
     powerManagement.enable = true;
   };
-
-  # Enabling AwesomeWM
-  sys.desktop.awesome.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -116,6 +113,8 @@
   environment.systemPackages = with pkgs; [
     cloudflare-warp
   ];
+
+  services.flatpak.enable = true;
 
   # Programs and configurating them
   programs.java = {

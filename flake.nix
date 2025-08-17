@@ -56,7 +56,7 @@
         thonkpad = nixpkgs.lib.nixosSystem {
           inherit system;
 
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs username; };
           modules = [
             {
               nixpkgs.overlays = overlays;
@@ -65,6 +65,22 @@
             nixos-hardware.nixosModules.lenovo-thinkpad-p50
             home-manager.nixosModules.home-manager
             (import ./system/thonkpad/configuration.nix)
+            (import ./hyprland)
+
+            {
+              desktop.hyprland.extraConfig = ''
+                input {
+                  accel_profile = flat
+                  sensitivity = 0.25
+
+                  touchpad {
+                    tap-to-click = false
+                  }
+                }
+              '';
+
+              desktop.hyprland.nvidia = true;
+            }
           ];
         };
 
@@ -81,6 +97,30 @@
             home-manager.nixosModules.home-manager
             (import ./system/haumea/configuration.nix)
             (import ./hyprland)
+
+            {
+              desktop.hyprland.extraConfig = ''
+                monitor=DP-3,7680x2160@120.00Hz,0x0,1.5
+
+                master {
+                  orientation = center
+                  slave_count_for_center_master = 0
+                  mfact = 0.65
+                }
+              '';
+
+              desktop.hyprland.modulesLeft = [
+                "custom/padding"
+                "hyprland/workspaces"
+                "hyprland/window"
+              ];
+
+              desktop.hyprland.modulesRight = [
+                "pulseaudio"
+                "clock"
+                "custom/padding"
+              ];
+            }
           ];
         };
       };

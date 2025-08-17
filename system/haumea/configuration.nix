@@ -96,16 +96,22 @@
   # Wireguard VPN
   networking.firewall = {
     allowedUDPPorts = [ ];
-    allowedTCPPorts = [ 5173 25565 ];
+    allowedTCPPorts = [
+      5173
+      25565
+    ];
   };
 
   networking.wg-quick.interfaces = {
     wg0 = {
-      address = ["192.168.239.6/32"];
+      address = [ "192.168.239.6/32" ];
 
       dns = [
-        "1.1.1.1" "1.0.0.1" "8.8.8.8"
-        "2606:4700:4700::1111" "2606:4700:4700::1001"
+        "1.1.1.1"
+        "1.0.0.1"
+        "8.8.8.8"
+        "2606:4700:4700::1111"
+        "2606:4700:4700::1001"
       ];
 
       listenPort = 51820;

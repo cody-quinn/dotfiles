@@ -1,6 +1,9 @@
+{
+  nvidia ? false,
+}:
+
 ''
   # See https://wiki.hyprland.org/Configuring/Monitors/
-  monitor=DP-3,7680x2160@120.00Hz,0x0,1.5
   monitor=,preferred,auto,1
 
   # See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -15,8 +18,6 @@
     touchpad {
       natural_scroll = no
     }
-
-    sensitivity = 0
   }
 
   general {
@@ -35,6 +36,17 @@
 
   env = GDK_SCALE,1.5
   env = XCURSOR_SIZE,24
+
+  ${
+    if nvidia then
+      "
+      env = LIBVA_DRIVER_NAME,nvidia
+      env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+      env = ELECTRON_OZONE_PLATFORM_HINT,auto
+      "
+    else
+      ""
+  }
 
   decoration {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -81,9 +93,6 @@
     allow_small_split = true
     new_status = slave
     new_on_top = no
-    orientation = center
-    slave_count_for_center_master = 0
-    mfact = 0.65
   }
 
   # bind = SUPER, [, removemaster
