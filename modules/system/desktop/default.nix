@@ -12,7 +12,6 @@
   ];
 
   config = {
-    services.xserver.enable = true;
     services.xserver.dpi = 96;
     services.xserver.xkb.layout = "us";
     services.xserver.xkb.options = "caps:swapescape, compose:ralt";

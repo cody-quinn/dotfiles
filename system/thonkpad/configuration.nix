@@ -111,6 +111,7 @@
 
   # Packages relegated to the entire system
   environment.systemPackages = with pkgs; [
+    networkmanagerapplet
     cloudflare-warp
   ];
 
