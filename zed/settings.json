@@ -1,0 +1,50 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette
+{
+  "vim_mode": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 13,
+  "buffer_font_family": "JetBrains Mono",
+  "theme": {
+    "mode": "light",
+    "dark": "One Dark",
+    "light": "One Light"
+  },
+  "terminal": {
+    "dock": "right"
+  },
+  "tabs": {
+    "git_status": true,
+    "file_icons": true
+  },
+  "relative_line_numbers": true,
+  "middle_click_paste": false,
+  "languages": {
+    "Plain Text": {
+      "format_on_save": "off",
+      "ensure_final_newline_on_save": false
+    },
+    "Nix": {
+      "tab_size": 2
+    },
+    "Zig": {
+      "format_on_save": "off",
+      "tab_size": 4
+    }
+  },
+  "lsp": {
+    "starpls": {
+      "binary": {
+        "path": "starpls",
+        "arguments": ["server", "--experimental_infer_ctx_attributes"]
+      }
+    }
+  },
+  "tab_size": 2
+}

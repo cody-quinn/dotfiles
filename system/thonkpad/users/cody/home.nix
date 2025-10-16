@@ -27,7 +27,6 @@
     # Development
     jetbrains.idea-ultimate
     jetbrains.rider
-    zed-editor
 
     # Calculator
     python310

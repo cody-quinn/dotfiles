@@ -50,7 +50,6 @@
     jetbrains.rider
     jetbrains.goland
     jetbrains.clion
-    zed-editor
 
     godot_4
     tiled

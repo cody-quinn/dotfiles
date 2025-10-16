@@ -1,0 +1,36 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "bindings": {
+      "ctrl-q": null
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && vim_operator == none && !VimWaiting",
+    "bindings": {
+      "ctrl-w w": "pane::CloseActiveItem",
+      "space r": "task::Rerun",
+      "space R": "task::Spawn",
+      "space s d": "command_palette::Toggle",
+      "space s f": "file_finder::Toggle",
+      "space s g": "pane::DeploySearch"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-w w": "pane::CloseActiveItem",
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+      "ctrl-w ctrl-w": ["terminal::SendKeystroke", "ctrl-w"]
+    }
+  }
+]

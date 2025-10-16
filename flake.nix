@@ -70,6 +70,7 @@
             home-manager.nixosModules.home-manager
             (import ./system/thonkpad/configuration.nix)
             (import ./hyprland)
+            (import ./zed)
 
             {
               desktop.hyprland.extraConfig = ''
@@ -101,10 +102,11 @@
             home-manager.nixosModules.home-manager
             (import ./system/haumea/configuration.nix)
             (import ./hyprland)
+            (import ./zed)
 
             {
               desktop.hyprland.extraConfig = ''
-                monitor=DP-3,7680x2160@120.00Hz,0x0,1.5
+                monitor=DP-4,7680x2160@120.00Hz,0x0,1.5
 
                 master {
                   orientation = center
