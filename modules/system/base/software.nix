@@ -25,6 +25,15 @@
     yt-dlp
     graphviz
     lm_sensors
+
+    nmap
+    whois
+
+
+    # Man pages
+    linux-manual
+    man-pages
+    man-pages-posix
   ];
 
   environment.shells = [

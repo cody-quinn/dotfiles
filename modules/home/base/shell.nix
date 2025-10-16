@@ -48,6 +48,7 @@ in
         mk = "minikube";
         d = "docker";
         dc = "docker compose";
+        note = "date +'%m-%d-%Y.md'";
       };
       history = {
         size = 1000;

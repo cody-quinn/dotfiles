@@ -54,6 +54,7 @@
         noto-fonts
         noto-fonts-lgc-plus
         jetbrains-mono
+        corefonts
 
         twitter-color-emoji
         font-awesome

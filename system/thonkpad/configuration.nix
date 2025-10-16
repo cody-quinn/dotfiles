@@ -24,6 +24,9 @@
   home-manager.extraSpecialArgs = { inherit inputs; };
   home-manager.users.cody = import ./users/cody/home.nix;
 
+   virtualisation.virtualbox.host.enable = true;
+   users.extraGroups.vboxusers.members = [ "cody" ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -113,6 +116,16 @@
   environment.systemPackages = with pkgs; [
     networkmanagerapplet
     cloudflare-warp
+
+    wine64
+    winetricks
+    bottles
+
+    unityhub
+
+    # Mounting iOS devices
+    libimobiledevice
+    ifuse
   ];
 
   services.flatpak.enable = true;
