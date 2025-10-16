@@ -97,7 +97,7 @@ in
     ripgrep
 
     # LSPs
-    clang-tools_15
+    clang-tools
     zls
   ];
 
@@ -279,7 +279,7 @@ in
           text = function(buffer) return ' ' .. buffer.filename .. ' ' end,
         },
       },
-    } 
+    }
 
     -- Configure Treesitter
     require('nvim-treesitter.configs').setup {
@@ -383,7 +383,7 @@ in
     -- TODO: Configure Java support
 
     -- Configure Python support
-    lspconfig.pylsp.setup { 
+    lspconfig.pylsp.setup {
       on_attach = function()
         completion.on_attach()
         -- Python specifically isn't setting omnifunc correctly, ftplugin conflict

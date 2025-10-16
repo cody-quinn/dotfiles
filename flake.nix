@@ -16,6 +16,10 @@
       url = "github:cody-quinn/discordfetch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hummingbird = {
+      url = "github:143mailliw/hummingbird";
+    };
   };
 
   outputs =

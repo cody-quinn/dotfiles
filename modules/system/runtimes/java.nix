@@ -42,7 +42,7 @@ in
       javaAliases = mapAttrs' (
         name: value: nameValuePair "java-${name}" "${value.home}/bin/java"
       ) javaPkgs;
-      javaTmpfiles = mapAttrsFlatten (name: value: "L+ /nix/java${name} - - - - ${value.home}") javaPkgs;
+      javaTmpfiles = mapAttrsToList (name: value: "L+ /nix/java${name} - - - - ${value.home}") javaPkgs;
       javaEnvVariables = mapAttrs' (
         name: value: nameValuePair "JAVA_HOME_${toUpper (escapeDashes name)}" "${value.home}"
       ) javaPkgs;

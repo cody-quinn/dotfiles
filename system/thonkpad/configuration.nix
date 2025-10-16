@@ -56,7 +56,7 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   services.logind.lidSwitch = "ignore";
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
   hardware.nvidia = {
     prime.offload.enable = false;
     prime.sync.enable = true;
@@ -68,7 +68,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

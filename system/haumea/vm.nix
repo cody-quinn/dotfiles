@@ -48,12 +48,7 @@ in
         onBoot = "start";
         onShutdown = "shutdown";
 
-        qemu = {
-          package = pkgs.qemu_kvm;
-
-          ovmf.enable = true;
-          ovmf.packages = [ pkgs.OVMFFull.fd ];
-        };
+        qemu.package = pkgs.qemu_kvm;
       };
 
       # Installing virt-manager

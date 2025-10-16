@@ -58,12 +58,10 @@
     bytecode-viewer
 
     dive
-
     minikube
     docker-machine-kvm2
     kubectl
     kubernetes-helm
-    lens
 
     # Calculator
     python310
@@ -72,12 +70,12 @@
   programs.git = {
     userName = "Cody";
     userEmail = "cody@codyq.dev";
-    signing.key = "1DE927325E9932E7";
+    signing.key = "14FA18936C13E1E4";
   };
 
   programs.gpg.enable = true;
   services.gpg-agent.enable = true;
-  services.gpg-agent.pinentryPackage = pkgs.pinentry-qt;
+  services.gpg-agent.pinentry.package = pkgs.pinentry-qt;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

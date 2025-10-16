@@ -56,7 +56,7 @@ in
       localVariables = {
         PROMPT = cfg.prefix + " ▲ %c " + cfg.suffix;
       };
-      initExtra = ''
+      initContent = ''
         eval "$(direnv hook zsh)"
       '';
     };

@@ -96,40 +96,25 @@
   # Wireguard VPN
   networking.firewall = {
     allowedUDPPorts = [ ];
-    allowedTCPPorts = [
-      5173
-      25565
-    ];
+    allowedTCPPorts = [ 5173 25565 32400 ];
   };
 
   networking.wg-quick.interfaces = {
-    wg0 = {
-      address = [ "192.168.239.6/32" ];
-
-      dns = [
-        "1.1.1.1"
-        "1.0.0.1"
-        "8.8.8.8"
-        "2606:4700:4700::1111"
-        "2606:4700:4700::1001"
-      ];
-
-      listenPort = 51820;
-      mtu = 1300;
-
-      privateKeyFile = "/etc/wireguard/wg0-key.priv";
+    wg0-sol = {
+      privateKeyFile = "/etc/wireguard/wg0-sol.key";
+      address = ["172.16.52.2/24"];
 
       peers = [
         {
-          publicKey = "RFPYvkr+luT91K+9u+cMKd/gQ/jNv6bQJmARuTrtHQ8=";
+          publicKey = "BLZFzSfItt/weVuh16A3a/VonUh6zcCAaQtr3suJMk4=";
 
           allowedIPs = [
-            "192.168.240.0/20"
-            "192.168.239.0/24"
+            # "0.0.0.0/0"
+            "172.16.52.0/24"
           ];
 
-          endpoint = "5.161.73.194:51820";
-          persistentKeepalive = 21;
+          endpoint = "5.78.138.182:51820";
+          persistentKeepalive = 25;
         }
       ];
     };
@@ -141,7 +126,7 @@
 
   # Timezone and internationalisation
   time.timeZone = "America/Phoenix";
-  i18n.defaultLocale = "en_US.utf8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   # Disabling power management & sleep
   powerManagement.enable = false;
@@ -166,7 +151,7 @@
   services.avahi.openFirewall = true;
 
   # Enable hardware acceleration
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   services.dbus.enable = true;
   security.polkit.enable = true;
@@ -175,7 +160,7 @@
   # sys.desktop.awesome.enable = false;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -217,6 +202,10 @@
     i2c-tools
 
     git-filter-repo
+
+    wireguard-tools
+
+    perl
 
     # Mounting iOS devices
     libimobiledevice
