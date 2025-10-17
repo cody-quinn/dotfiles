@@ -24,8 +24,8 @@
   home-manager.extraSpecialArgs = { inherit inputs; };
   home-manager.users.cody = import ./users/cody/home.nix;
 
-   virtualisation.virtualbox.host.enable = true;
-   users.extraGroups.vboxusers.members = [ "cody" ];
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "cody" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

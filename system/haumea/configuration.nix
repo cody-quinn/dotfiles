@@ -96,13 +96,17 @@
   # Wireguard VPN
   networking.firewall = {
     allowedUDPPorts = [ ];
-    allowedTCPPorts = [ 5173 25565 32400 ];
+    allowedTCPPorts = [
+      5173
+      25565
+      32400
+    ];
   };
 
   networking.wg-quick.interfaces = {
     wg0-sol = {
       privateKeyFile = "/etc/wireguard/wg0-sol.key";
-      address = ["172.16.52.2/24"];
+      address = [ "172.16.52.2/24" ];
 
       peers = [
         {

@@ -27,14 +27,16 @@ in
     ];
 
     virtualisation.docker.enable = (mkIf cfg.docker.enable true);
-    virtualisation.libvirtd = (mkIf cfg.kvm.enable {
-      enable = true;
-      qemu = {
-        package = pkgs.qemu_kvm;
-        runAsRoot = true;
-        swtpm.enable = true;
-      };
-    });
+    virtualisation.libvirtd = (
+      mkIf cfg.kvm.enable {
+        enable = true;
+        qemu = {
+          package = pkgs.qemu_kvm;
+          runAsRoot = true;
+          swtpm.enable = true;
+        };
+      }
+    );
 
     boot.kernelModules = [
       "kvm-amd"

@@ -29,7 +29,6 @@
     nmap
     whois
 
-
     # Man pages
     linux-manual
     man-pages
