@@ -6,6 +6,13 @@
   ...
 }:
 
+let
+  script-journal = pkgs.writeScriptBin "journal" ''
+    #!/bin/sh
+    mkdir -p ~/Projects/codyq.dev/data/journal/$(date +'%Y/%m') &&
+    zeditor ~/Projects/codyq.dev/data/journal/$(date +'%Y/%m/%d.md')
+  '';
+in
 {
   imports = [
     ../../../../modules/home/base
@@ -18,6 +25,9 @@
   home.homeDirectory = "/home/cody";
 
   home.packages = with pkgs; [
+    # Personal Scripts
+    script-journal
+
     # Communication
     (discord.override { nss = nss_latest; })
     (discord-canary.override { nss = nss_latest; })
