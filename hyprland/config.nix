@@ -20,6 +20,10 @@
     }
   }
 
+  ecosystem {
+    no_update_news = true
+  }
+
   general {
     gaps_in = 0
     gaps_out = 0
@@ -97,11 +101,6 @@
 
   # bind = SUPER, [, removemaster
   # bind = SUPER, ], addmaster
-
-  gestures {
-    # See https://wiki.hyprland.org/Configuring/Variables/ for more
-    workspace_swipe = off
-  }
 
   # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
   # -- Fix odd behaviors in IntelliJ IDEs --
