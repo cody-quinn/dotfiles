@@ -186,6 +186,7 @@
       "libvirtd"
       "kvm"
       "i2c"
+      "wireshark"
     ];
     packages = with pkgs; [ firefox ];
     shell = pkgs.zsh;
@@ -253,6 +254,11 @@
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
+  };
+
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
   };
 
   # Setup discordfetch

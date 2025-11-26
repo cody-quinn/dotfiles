@@ -157,8 +157,8 @@
 
   bind = SUPER      , H     , resizeactive, -50 0
   bind = SUPER      , L     , resizeactive, 50 0
-  bind = SUPER      , J     , layoutmsg, cyclenext
-  bind = SUPER      , K     , layoutmsg, cycleprev
+  bind = SUPER      , J     , layoutmsg, cycleprev
+  bind = SUPER      , K     , layoutmsg, cyclenext
   bind = SUPER      , M     , layoutmsg, swapwithmaster
   bind = SUPER      , F     , layoutmsg, focusmaster
 

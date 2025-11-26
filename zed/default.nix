@@ -16,11 +16,7 @@
         "fsharp"
       ];
 
-      extraPackages = with pkgs; [
-        fsautocomplete
-        nixd
-        nil
-      ];
+      extraPackages = with pkgs; [ ];
 
       userSettings = {
         # Vim mode RAHHHH
@@ -61,32 +57,58 @@
         format_on_save = "off";
         tab_size = 2;
 
-        languages."Plain Text" = {
-          ensure_final_newline_on_save = false;
+        languages = {
+          "Plain Text" = {
+            ensure_final_newline_on_save = false;
+          };
+
+          # Markup & Configuration Languages
+          "Nix".wrap_guides = [ 80 ];
+
+          "Markdown" = {
+            wrap_guides = [ 80 ];
+            format_on_save = "on";
+          };
+
+          # Programming Languages
+          "C".wrap_guides = [ 100 ];
+          "C++".wrap_guides = [ 100 ];
+          "Java".wrap_guides = [ 100 ];
+
+          "Rust" = {
+            wrap_guides = [ 100 ];
+            tab_size = 4;
+          };
+
+          "Zig" = {
+            preferred_line_length = 100;
+            wrap_guides = [ 100 ];
+            tab_size = 4;
+            language_servers = [ "zls" ];
+            code_actions_on_format = {
+              "source.fixAll" = true;
+              "source.organizeImports" = true;
+            };
+          };
         };
 
-        # Markup & Configuration Languages
-        languages."Markdown" = {
-          wrap_guides = [ 80 ];
-          format_on_save = "on";
+        # Language server paths
+        lsp = {
+          nixd.binary.path = "${pkgs.nixd}/bin/nixd";
+          nil.binary.path = "${pkgs.nil}/bin/nil";
+          clangd.binary.path = "${pkgs.clang-tools}/bin/clangd";
+          rust-analyzer.binary.path = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+          fsautocomplete.binary.path = "${pkgs.fsautocomplete}/bin/fsautocomplete";
+
+          # JavaShit
+          tailwindcss-language-server.binary.path = "${pkgs.tailwindcss-language-server}/bin/tailwindcss-language-server";
+          package-version-server.binary.path = "${pkgs.package-version-server}/bin/package-version-server";
         };
 
-        languages."Nix" = {
-          wrap_guides = [ 80 ];
-        };
-
-        # Programming Languages
-        languages."C" = {
-          wrap_guides = [ 100 ];
-        };
-
-        languages."Java" = {
-          wrap_guides = [ 100 ];
-        };
-
-        languages."Zig" = {
-          wrap_guides = [ 100 ];
-          tab_size = 4;
+        node = {
+          ignore_system_version = false;
+          path = "${pkgs.nodePackages.nodejs}/bin/node";
+          npm_path = "${pkgs.nodePackages.nodejs}/bin/npm";
         };
       };
 
