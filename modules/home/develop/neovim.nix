@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }:
 
@@ -16,16 +14,6 @@ let
       sha256 = "N3O/AvsD6Ckd62kDEN4z/K5A3SZNR15DnQeZhH6/Rr0=";
     };
     meta.homepage = "https://github.com/j-hui/fidget.nvim/";
-  };
-  sloth-syntax = pkgs.vimUtils.buildVimPlugin {
-    pname = "sloth-syntax";
-    version = "2023-07-30";
-    src = pkgs.fetchFromGitHub {
-      owner = "slothlang";
-      repo = "vim";
-      rev = "9e331abb25dc17986bbd222fbbe28e76fc3034af";
-      sha256 = "kSwV+uMufwyhdHynxaShWHCWAj8Q15EJ+2VoIKFqoqw=";
-    };
   };
 in
 {
@@ -81,8 +69,6 @@ in
 
     # Language Support
     nvim-lspconfig
-    rust-tools-nvim
-    sloth-syntax
     emmet-vim
 
     # Autocompletion
@@ -95,10 +81,6 @@ in
   # Configuring neovim and installing packages required by our config
   programs.neovim.extraPackages = with pkgs; [
     ripgrep
-
-    # LSPs
-    clang-tools
-    zls
   ];
 
   programs.neovim.extraLuaConfig = ''
@@ -323,77 +305,6 @@ in
         nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
       end,
     })
-
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      callback = function(ev)
-        vim.lsp.buf.format()
-      end,
-    })
-
-    -- Configure C/C++ support
-    lspconfig.clangd.setup {
-      on_attach = function(_, bufnr)
-        local nmap = function(keys, func, desc)
-          if desc then desc = 'LSP: ' .. desc end
-          vim.keymap.set('n', keys, func, { silent = true, buffer = bufnr, desc = desc })
-        end
-
-        nmap('<leader>Rr', '<CMD>FloatermNew --autoclose=0 make run<CR>'                   , 'Run Project')
-      end
-    }
-
-    -- Configure Rust support
-    require('rust-tools').setup {
-      tools = {
-        inlay_hints = {
-          auto = true,
-          show_parameter_hints = false,
-          parameter_hints_prefix = ''',
-          other_hints_prefix = ''',
-        },
-      },
-      server = {
-        on_attach = function(_, bufnr)
-          local rt = require('rust-tools')
-          local nmap = function(keys, func, desc)
-            if desc then desc = 'LSP: ' .. desc end
-            vim.keymap.set('n', keys, func, { silent = true, buffer = bufnr, desc = desc })
-          end
-
-          nmap('<leader>Rr', '<CMD>FloatermNew --autoclose=0 cargo run<CR>'                   , 'Run Project')
-          nmap('<leader>Rt', '<CMD>FloatermNew --autoclose=0 cargo test<CR>'                  , 'Run Tests')
-          nmap('<leader>Rc', '<CMD>FloatermNew --autoclose=0 cargo clippy<CR>'                , 'Run Clippy')
-          nmap('<leader>RC', '<CMD>FloatermNew --autoclose=0 cargo deny check -A warnings<CR>', 'Run Cargo Deny')
-
-          nmap('gM', rt.expand_macro.expand_macro, 'Expand Macro')
-        end,
-        settings = {
-          ['rust-analyzer'] = {
-            check = {
-              command = "clippy",
-            },
-            procMacro = {
-              enable = true,
-            },
-          },
-        },
-      },
-    }
-
-    -- TODO: Configure Java support
-
-    -- Configure Python support
-    lspconfig.pylsp.setup {
-      on_attach = function()
-        completion.on_attach()
-        -- Python specifically isn't setting omnifunc correctly, ftplugin conflict
-        vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-      end
-    }
-
-    -- Configure Zig support
-    lspconfig.zls.setup {
-    }
 
     -- Configure Auto Complete
     local cmp = require('cmp')

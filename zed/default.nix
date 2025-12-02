@@ -29,7 +29,7 @@
         buffer_font_family = "JetBrains Mono";
 
         # Editor fit & feel
-        relative_line_numbers = true;
+        relative_line_numbers = "enabled";
         middle_click_paste = false;
         show_wrap_guides = true;
 

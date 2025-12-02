@@ -77,8 +77,10 @@ in
   ];
 
   programs.git = {
-    userName = "Cody";
-    userEmail = "cody@codyq.dev";
+    settings = {
+      user.name = "Cody";
+      user.email = "cody@codyq.dev";
+    };
     signing.key = "14FA18936C13E1E4";
   };
 

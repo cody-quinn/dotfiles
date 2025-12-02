@@ -7,7 +7,7 @@
 
 {
   programs.git.enable = true;
-  programs.git.extraConfig = {
+  programs.git.settings = {
     core.editor = "nvim";
     commit.gpgsign = true;
   };

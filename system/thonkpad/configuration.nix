@@ -135,14 +135,14 @@
     enable = true;
     additionalRuntimes = {
       inherit (pkgs)
-        jdk23
+        jdk25
         jdk21
         jdk17
         jdk11
         jdk8
         ;
     };
-    package = pkgs.jdk21;
+    package = pkgs.jdk25;
   };
 
   programs.zsh.enable = true;

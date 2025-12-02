@@ -13,7 +13,7 @@
     neovide
     nemo
     peazip
-    bitwarden
+    bitwarden-desktop
     qbittorrent
     libreoffice
 
